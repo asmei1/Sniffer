@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+/Sniffer/x64/
+*.pdb
+*.ilk
+*.ipch
+/.vs/
