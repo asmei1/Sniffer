@@ -16,16 +16,17 @@ public:
 
    std::string getName() const;
    std::string getDescription() const;
-   bool isLoopBack() const;
    std::string getFullDescription() const;
+   bool isLoopBack() const;
 
-   bool openAdapter(std::string& errorString);
    bool checkLinkLayer(LinkLayer linkName) const;
 
    friend std::ostream& operator<<(std::ostream& stream, Adapter& dev);
-
-private:
+   friend class AdapterManager;
    pcap_t* adHandler = nullptr;
+private:
+   bool openAdapter(std::string& errorString);
+
 
    std::string name;
    std::string description;

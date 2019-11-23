@@ -2,8 +2,7 @@
 #include "Adapter.h"
 #include <assert.h>
 #include <sstream>
-
-#define PACKET_PART_TO_CAPTURE 65536
+#include "AdapterManager.h"
 
 std::ostream& operator<<(std::ostream& stream, Adapter& dev)
 {

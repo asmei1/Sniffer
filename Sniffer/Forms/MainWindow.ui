@@ -35,10 +35,16 @@
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
+      <property name="childrenCollapsible">
+       <bool>false</bool>
+      </property>
       <widget class="QTableView" name="tableView_packets"/>
       <widget class="QSplitter" name="splitter">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="childrenCollapsible">
+        <bool>true</bool>
        </property>
        <widget class="QTreeView" name="treeView_infoView"/>
        <widget class="QPlainTextEdit" name="plainTextEdit_tempInfoBox">

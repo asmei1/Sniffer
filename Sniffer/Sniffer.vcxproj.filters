@@ -78,9 +78,6 @@
     <ClCompile Include="Src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\NetworkAdapter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\FilterGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -94,6 +91,9 @@
       <Filter>Widgets</Filter>
     </ClCompile>
     <ClCompile Include="Src\Adapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AdapterManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -118,9 +118,6 @@
     <ClInclude Include="Src\IPv4Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\NetworkAdapter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\FilterGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -134,6 +131,9 @@
       <Filter>Structures</Filter>
     </ClInclude>
     <ClInclude Include="Src\Adapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\AdapterManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
