@@ -5,17 +5,15 @@
 class AdapterManager
 {
 public:
-   bool loadAllDevices();
-   std::string getLastErrorInfo();
+   void loadAllDevices();
 
    const std::vector<Adapter>& getAllAdapters() const;
    const Adapter* getOpenedAdapter() const;
 
-   bool openAdapter(const std::string& adapterName, std::string& error);
-   void closeAdapter(const std::string& adapterName, std::string& error);
+   void openAdapter(const std::string& adapterName);
+   void closeAdapter(const std::string& adapterName);
 private:
    Adapter* openedAdapter = nullptr;
    std::vector<Adapter> allAdapters;
-   std::string lastError;
 };
 

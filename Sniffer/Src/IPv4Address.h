@@ -11,6 +11,11 @@ struct IPv4Address
       return std::to_string(this->addr[0]) + "." + std::to_string(this->addr[1]) + "." + std::to_string(this->addr[2]) + "." + std::to_string(this->addr[3]);
    }
 
+   QString toQString() const
+   {
+      return QString::fromStdString(this->toString());
+   }
+
    static IPv4Address getIPv4(const sockaddr* addr)
    {
       IPv4Address rVAddress;

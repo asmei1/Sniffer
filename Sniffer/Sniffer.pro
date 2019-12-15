@@ -15,9 +15,12 @@ UI_DIR += .
 RCC_DIR += .
 win32:RC_FILE = Sniffer.rc
 HEADERS += ./stdafx.h \
-    ./MainWindow.h
+    ./MainWindow.h \
+    Src/DeviceListWidget.h
 SOURCES += ./main.cpp \
     ./MainWindow.cpp \
-    ./stdafx.cpp
-FORMS += ./Forms/MainWindow.ui
+    ./stdafx.cpp \
+    Src/DeviceListWidget.cpp
+FORMS += ./Forms/MainWindow.ui \
+    Forms/DeviceListWidget.ui
 RESOURCES += Sniffer.qrc

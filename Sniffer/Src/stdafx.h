@@ -1,6 +1,7 @@
 #pragma once
 #include <pcap.h>
 #include <QtWidgets>
+#include <QtConcurrent/QtConcurrent>
 #include <string>
 #include <vector>
 #include <array>

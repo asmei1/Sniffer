@@ -83,7 +83,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\npcap\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -130,18 +130,20 @@
     <ResourceCompile Include="Sniffer.rc" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Forms\DeviceListWidget.ui" />
     <QtUic Include="Forms\MainWindow.ui" />
-    <QtUic Include="Src\DeviceListWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Adapter.cpp" />
     <ClCompile Include="Src\DeviceListWidget.cpp" />
     <ClCompile Include="Src\LogWidget.cpp" />
     <ClCompile Include="Src\FilterGenerator.cpp" />
-    <ClCompile Include="Src\IPv4.cpp" />
+    <ClCompile Include="Src\IPv4Interface.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
     <ClCompile Include="Src\AdapterManager.cpp" />
+    <ClCompile Include="Src\PacketListener.cpp" />
+    <ClCompile Include="Src\PacketsModel.cpp" />
     <ClCompile Include="Src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -157,9 +159,13 @@
     <ClInclude Include="Src\FilterGenerator.h" />
     <ClInclude Include="Src\IPv4Address.h" />
     <ClInclude Include="Src\IPv4Interface.h" />
-    <ClInclude Include="Src\IPv4Packet.h" />
+    <ClInclude Include="Src\IPv4Header.h" />
     <QtMoc Include="Src\Logger.hpp" />
     <ClInclude Include="Src\AdapterManager.h" />
+    <QtMoc Include="Src\PacketListener.h" />
+    <QtMoc Include="Src\PacketsModel.h" />
+    <ClInclude Include="Src\Printer.h" />
+    <ClInclude Include="Src\Protocols.h" />
     <ClInclude Include="Src\stdafx.h" />
     <ClInclude Include="Src\UDPPacket.h" />
   </ItemGroup>

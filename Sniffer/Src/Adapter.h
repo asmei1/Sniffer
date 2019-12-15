@@ -13,19 +13,21 @@ public:
    };
 
    void addIPv4Interface(const IPv4Interface& ipv4Interface);
+   void addIPv4Interface(const pcap_addr_t* address);
 
    std::string getName() const;
    std::string getDescription() const;
    std::string getFullDescription() const;
+   pcap_t* getRawHandler() const;
+
    bool isLoopBack() const;
 
    bool checkLinkLayer(LinkLayer linkName) const;
 
    friend std::ostream& operator<<(std::ostream& stream, Adapter& dev);
-   friend class AdapterManager;
-   pcap_t* adHandler = nullptr;
+   void openAdapter();
 private:
-   bool openAdapter(std::string& errorString);
+   pcap_t* adHandler = nullptr;
 
 
    std::string name;

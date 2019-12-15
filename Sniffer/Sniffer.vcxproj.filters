@@ -51,6 +51,9 @@
     <Filter Include="Widgets">
       <UniqueIdentifier>{1a0bc2f8-70dc-43c5-ab86-2712d97eede5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{31511009-1f03-4038-9dc9-c8902f24425d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Sniffer.qrc">
@@ -64,7 +67,7 @@
     <QtUic Include="Forms\MainWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="Src\DeviceListWidget.ui">
+    <QtUic Include="Forms\DeviceListWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -81,9 +84,6 @@
     <ClCompile Include="Src\FilterGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\IPv4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\LogWidget.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
@@ -95,6 +95,15 @@
     </ClCompile>
     <ClCompile Include="Src\AdapterManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PacketListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\IPv4Interface.cpp">
+      <Filter>Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PacketsModel.cpp">
+      <Filter>Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,12 +119,15 @@
     <QtMoc Include="Src\DeviceListWidget.h">
       <Filter>Widgets</Filter>
     </QtMoc>
+    <QtMoc Include="Src\PacketListener.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\PacketsModel.h">
+      <Filter>Models</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\IPv4Interface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\FilterGenerator.h">
@@ -127,13 +139,22 @@
     <ClInclude Include="Src\UDPPacket.h">
       <Filter>Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\IPv4Packet.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Adapter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\AdapterManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\IPv4Header.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\IPv4Interface.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Protocols.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Printer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -23,6 +23,11 @@ void Adapter::addIPv4Interface(const IPv4Interface& ipv4Interface)
    this->ipv4List.push_back(ipv4Interface);
 }
 
+void Adapter::addIPv4Interface(const pcap_addr_t* address)
+{
+   this->ipv4List.push_back(IPv4Interface::getInterface(address));
+}
+
 std::string Adapter::getName() const
 {
    return this->name;
@@ -63,20 +68,25 @@ std::string Adapter::getFullDescription() const
    return rV;
 }
 
-bool Adapter::openAdapter(std::string& errorString)
+pcap_t* Adapter::getRawHandler() const
 {
-   bool rV = false;
+   return this->adHandler;
+}
+
+void Adapter::openAdapter()
+{
    char errorBuff[PCAP_ERRBUF_SIZE] = {};
 
    pcap_t* temp = pcap_open(this->name.c_str(), PACKET_PART_TO_CAPTURE, PCAP_OPENFLAG_PROMISCUOUS, 1000, NULL, errorBuff);
    if(nullptr != temp)
    {
-      rV = true;
-
       this->adHandler = temp;
-      errorString = errorBuff;
    }
-   return rV;
+   else
+   {
+      throw (errorBuff);
+   }
+      
 }
 
 bool Adapter::checkLinkLayer(LinkLayer linkName) const
