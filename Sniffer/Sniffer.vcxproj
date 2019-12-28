@@ -160,8 +160,7 @@
     <ClInclude Include="Src\Adapter.h" />
     <ClInclude Include="Src\Structures\EthernetHeader.h" />
     <ClInclude Include="Src\FilterGenerator.h" />
-    <ClInclude Include="Src\Structures\Headers.h" />
-    <ClInclude Include="Src\Structures\IPv4Address.h" />
+    <ClInclude Include="Src\Structures\Types.h" />
     <ClInclude Include="Src\Structures\IPv4Interface.h" />
     <ClInclude Include="Src\Structures\IPv4Header.h" />
     <QtMoc Include="Src\Logger.hpp" />
@@ -169,9 +168,8 @@
     <QtMoc Include="Src\PacketListener.h" />
     <QtMoc Include="Src\Models\PacketsModel.h" />
     <ClInclude Include="Src\Printer.h" />
-    <ClInclude Include="Src\Structures\Protocols.h" />
     <ClInclude Include="Src\stdafx.h" />
-    <ClInclude Include="Src\Structures\UDPPacket.h" />
+    <ClInclude Include="Src\Structures\UDPHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

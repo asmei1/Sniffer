@@ -1,9 +1,61 @@
 #pragma once
 #include "stdafx.h"
 #include "Structures/IPv4Header.h"
+#include "Structures/EthernetHeader.h"
+#include <sstream>
+
 
 namespace qsn
 {
+   static std::string mac2HexString(const MacAddr& mac, const std::string& delimiter = ":")
+   {
+      std::stringstream ss;
+      for(size_t i = 0; i < mac.size(); i++)
+      {
+         ss << std::hex << std::setw(2) << static_cast<int>(mac[i]);
+         if(i + 1 < mac.size())
+         {
+            ss << delimiter;
+         }
+      }
+
+      return ss.str();
+   }
+
+   static std::string ethernetHeader2String(const EthernetHeader& ethPack)
+   {
+      return "Dst mac: " + mac2HexString(ethPack.dest) + "\nSrc mac: " + mac2HexString(ethPack.source);
+   }
+
+   static std::string ipv42String(const IPv4Addr& addr)
+   {
+      return std::to_string(addr[0]) + "." + std::to_string(addr[1]) + "." + std::to_string(addr[2]) + "." + std::to_string(addr[3]);
+   }
+
+   inline const char* protToCStr(const int protID)
+   {
+      switch(protID)
+      {
+      case IPPROTO_TCP:
+         return "TCP";
+      case IPPROTO_ICMP:
+         return "ICMP";
+      case IPPROTO_IPV4:
+         return "IPv4";
+      case IPPROTO_IPV6:
+         return "IPv6";
+      case IPPROTO_UDP:
+         return "UDP";
+      default:
+         return "Undefined protocol";
+      }
+   }
+
+   inline std::string protToStr(const int protID)
+   {
+      return protToCStr(protID);
+   }
+
    static std::string rawIPv4Desc(const IPv4Header& ip4Header)
    {
       std::string rV;
@@ -14,8 +66,9 @@ namespace qsn
       rV += std::string("TTL (time to live): ") + std::to_string(ip4Header.ttl) + "\n";
       rV += std::string("Packet length: ") + std::to_string(ip4Header.tlen) + "\n";
       rV += std::string("CRC: ") + std::to_string(ip4Header.crc) + "\n";
-      rV += std::string("Source address: ") + ip4Header.saddr.toString() + "\n";
-      rV += std::string("Destination address: ") + ip4Header.daddr.toString() + "\n";
+      rV += std::string("Source address: ") + ipv42String(ip4Header.saddr) + "\n";
+      rV += std::string("Destination address: ") + ipv42String(ip4Header.daddr) + "\n";
       return rV;
    }
+
 }

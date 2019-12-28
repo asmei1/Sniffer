@@ -28,7 +28,7 @@ private:
 
    Ui::MainWindow* ui;
 
-   PacketListener packetListener;
-   AdapterManager networkAdapter;
+   qsn::PacketListener packetListener;
+   qsn::AdapterManager networkAdapter;
    PacketsModel* packetsModel = nullptr;
 };

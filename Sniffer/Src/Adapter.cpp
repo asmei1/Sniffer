@@ -3,6 +3,9 @@
 #include <assert.h>
 #include <sstream>
 #include "AdapterManager.h"
+#include "Printer.h"
+
+using namespace qsn;
 
 std::ostream& operator<<(std::ostream& stream, Adapter& dev)
 {
@@ -60,10 +63,10 @@ std::string Adapter::getFullDescription() const
 
    for(const auto& in : this->ipv4List)
    {
-      rV += "\tAddress: " + in.ipv4.toString() + "\n";
-      rV += "\tMask: " + in.netmask.toString() + "\n";
-      rV += "\tBroadcast: " + in.broadcast.toString() + "\n";
-      rV += "\tDestination Address: " + in.destination.toString() + "\n";
+      rV += "\tAddress: " + ipv42String(in.ipv4) + "\n";
+      rV += "\tMask: " + ipv42String(in.netmask) + "\n";
+      rV += "\tBroadcast: " + ipv42String(in.broadcast) + "\n";
+      rV += "\tDestination Address: " + ipv42String(in.destination) + "\n";
    }
    return rV;
 }

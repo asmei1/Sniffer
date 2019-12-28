@@ -3,7 +3,7 @@
 #include "ui_DeviceListWidget.h"
 
 
-DeviceListWidget::DeviceListWidget(const std::vector<Adapter>& devices, QWidget* parent)
+DeviceListWidget::DeviceListWidget(const std::vector<qsn::Adapter>& devices, QWidget* parent)
    : QDialog(parent), ui(new Ui::DeviceListWidget())
 {
    this->ui->setupUi(this);

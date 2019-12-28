@@ -1,8 +1,10 @@
 #pragma once
-
-
-struct EthernetHeader
+#include "Types.h"
+namespace qsn
 {
-   unsigned char destMac[6];
-   unsigned char sourceMac[6];
-};
+   struct EthernetHeader
+   {
+      MacAddr dest;
+      MacAddr source;
+   };
+}

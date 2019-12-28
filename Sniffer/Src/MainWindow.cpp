@@ -13,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
    this->ui->actionStart_listening->setEnabled(false);
    this->ui->actionStop_listening->setEnabled(false);
 
-   //table
 
    connect(&Logger::getInstance(), &Logger::log, this->ui->logWidget, &LogWidget::logQStr);
 
@@ -27,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
       emit Logger::getInstance().log(e.what(), LogWidget::LogLevel::ERR);
    }
 
-   connect(&this->packetListener, &PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
+   connect(&this->packetListener, &qsn::PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
 
    this->packetsModel = new PacketsModel(this);
    this->ui->tableView_packets->setModel(this->packetsModel);

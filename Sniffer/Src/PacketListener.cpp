@@ -1,7 +1,10 @@
 #include "stdafx.h"
 #include "PacketListener.h"
 #include "Structures/IPv4Header.h"
+#include "Structures/EthernetHeader.h"
 #include "Printer.h"
+
+using namespace qsn;
 
 PacketListener::PacketListener()
 {
@@ -11,7 +14,8 @@ void PacketListener::packetHandling()
 {
    int res;
    struct pcap_pkthdr* header;
-   IPv4Header* ih;
+   qsn::IPv4Header* ih;
+   qsn::EthernetHeader* eH;
 
    struct tm* ltime;
    char timestr[16];
@@ -40,10 +44,13 @@ void PacketListener::packetHandling()
       local_tv_sec = header->ts.tv_sec;
       ltime = localtime(&local_tv_sec);
       strftime(timestr, sizeof timestr, "%H:%M:%S", ltime);
-      ih = (IPv4Header*)(pkt_data + 14);
+      eH = (qsn::EthernetHeader*)(pkt_data);
+      ih = (qsn::IPv4Header*)(pkt_data + 14);
 
       emit rawPacketSig(QString("Time: %1, len: %2").arg(timestr).arg(header->len));
-      emit rawPacketSig(QString("Raw:\n %1").arg(qsn::rawIPv4Desc(*ih).c_str()));
+      emit rawPacketSig(QString("Raw:\n%1\n%2")
+         .arg(qsn::ethernetHeader2String(*eH).c_str())
+         .arg(qsn::rawIPv4Desc(*ih).c_str()));
    }
 }
 

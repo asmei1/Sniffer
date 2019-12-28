@@ -1,7 +1,7 @@
 #pragma once
-#include "PCH.h"
+#include "stdafx.h"
 
-struct UDPPacket
+struct UDPHeader
 {
    u_short sport;          // Source port
    u_short dport;          // Destination port

@@ -1,15 +1,17 @@
 #pragma once
-#include "IPv4Address.h"
+#include "Types.h"
 
-
-struct IPv4Interface
+namespace qsn
 {
-   IPv4Address ipv4;
-   IPv4Address netmask;
-   IPv4Address broadcast;
-   IPv4Address destination;
+   struct IPv4Interface
+   {
+      IPv4Addr ipv4;
+      IPv4Addr netmask;
+      IPv4Addr broadcast;
+      IPv4Addr destination;
 
-   static IPv4Interface getInterface(const pcap_addr_t* address);
+      static IPv4Interface getInterface(const pcap_addr_t* address);
 
-   static inline IPv4Address NETMASK_C = { 255, 255, 255, 255 };
-};
+      static inline IPv4Addr NETMASK_C = { 255, 255, 255, 255 };
+   };
+}

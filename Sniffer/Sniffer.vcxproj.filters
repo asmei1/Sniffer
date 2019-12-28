@@ -148,25 +148,19 @@
     <ClInclude Include="Src\Printer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\Headers.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Structures\IPv4Address.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Structures\IPv4Header.h">
       <Filter>Structures</Filter>
     </ClInclude>
     <ClInclude Include="Src\Structures\IPv4Interface.h">
       <Filter>Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\UDPPacket.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Structures\EthernetHeader.h">
       <Filter>Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\Protocols.h">
+    <ClInclude Include="Src\Structures\Types.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\UDPHeader.h">
       <Filter>Structures</Filter>
     </ClInclude>
   </ItemGroup>

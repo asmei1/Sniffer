@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "AdapterManager.h"
-
+using namespace qsn;
 
 void AdapterManager::loadAllDevices()
 {

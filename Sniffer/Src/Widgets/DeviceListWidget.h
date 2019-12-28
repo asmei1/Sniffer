@@ -9,7 +9,7 @@ class DeviceListWidget : public QDialog
    Q_OBJECT;
 
 public:
-   DeviceListWidget(const std::vector<Adapter>& devices, QWidget* parent = Q_NULLPTR);
+   DeviceListWidget(const std::vector<qsn::Adapter>& devices, QWidget* parent = Q_NULLPTR);
    ~DeviceListWidget();
 
    QString getNameOfSelectedAdapter() const;
