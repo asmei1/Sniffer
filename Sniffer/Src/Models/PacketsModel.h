@@ -17,7 +17,7 @@ public:
    int columnCount(const QModelIndex& parent) const override;
 
    bool insertRows(int row, int count, const QModelIndex& parent) override;
-
+      
 private:
    const QStringList headers =
    {

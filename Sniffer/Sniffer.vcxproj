@@ -134,16 +134,17 @@
     <QtUic Include="Forms\MainWindow.ui" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Widgets\PacketsTableView.cpp" />
     <ClCompile Include="Src\Adapter.cpp" />
-    <ClCompile Include="Src\DeviceListWidget.cpp" />
-    <ClCompile Include="Src\LogWidget.cpp" />
+    <ClCompile Include="Src\Widgets\DeviceListWidget.cpp" />
+    <ClCompile Include="Src\Widgets\LogWidget.cpp" />
     <ClCompile Include="Src\FilterGenerator.cpp" />
-    <ClCompile Include="Src\IPv4Interface.cpp" />
+    <ClCompile Include="Src\Structures\IPv4Interface.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
     <ClCompile Include="Src\AdapterManager.cpp" />
     <ClCompile Include="Src\PacketListener.cpp" />
-    <ClCompile Include="Src\PacketsModel.cpp" />
+    <ClCompile Include="Src\Models\PacketsModel.cpp" />
     <ClCompile Include="Src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -153,21 +154,24 @@
     <QtMoc Include="Src\MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Src\LogWidget.hpp" />
-    <QtMoc Include="Src\DeviceListWidget.h" />
+    <QtMoc Include="Src\Widgets\LogWidget.hpp" />
+    <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
+    <QtMoc Include="Src\Widgets\PacketsTableView.h" />
     <ClInclude Include="Src\Adapter.h" />
+    <ClInclude Include="Src\Structures\EthernetHeader.h" />
     <ClInclude Include="Src\FilterGenerator.h" />
-    <ClInclude Include="Src\IPv4Address.h" />
-    <ClInclude Include="Src\IPv4Interface.h" />
-    <ClInclude Include="Src\IPv4Header.h" />
+    <ClInclude Include="Src\Structures\Headers.h" />
+    <ClInclude Include="Src\Structures\IPv4Address.h" />
+    <ClInclude Include="Src\Structures\IPv4Interface.h" />
+    <ClInclude Include="Src\Structures\IPv4Header.h" />
     <QtMoc Include="Src\Logger.hpp" />
     <ClInclude Include="Src\AdapterManager.h" />
     <QtMoc Include="Src\PacketListener.h" />
-    <QtMoc Include="Src\PacketsModel.h" />
+    <QtMoc Include="Src\Models\PacketsModel.h" />
     <ClInclude Include="Src\Printer.h" />
-    <ClInclude Include="Src\Protocols.h" />
+    <ClInclude Include="Src\Structures\Protocols.h" />
     <ClInclude Include="Src\stdafx.h" />
-    <ClInclude Include="Src\UDPPacket.h" />
+    <ClInclude Include="Src\Structures\UDPPacket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

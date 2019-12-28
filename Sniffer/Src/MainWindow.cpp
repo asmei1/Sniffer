@@ -2,8 +2,8 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "Logger.hpp"
-#include "DeviceListWidget.h"
-#include "PacketsModel.h"
+#include "Widgets/DeviceListWidget.h"
+#include "Models/PacketsModel.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
    this->ui->actionStart_listening->setEnabled(false);
    this->ui->actionStop_listening->setEnabled(false);
 
+   //table
 
    connect(&Logger::getInstance(), &Logger::log, this->ui->logWidget, &LogWidget::logQStr);
 
@@ -30,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
 
    this->packetsModel = new PacketsModel(this);
    this->ui->tableView_packets->setModel(this->packetsModel);
+
+   //on_actionShow_device_list_triggered();
 }
 
 MainWindow::~MainWindow()
@@ -46,6 +49,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionShow_device_list_triggered()
 {
    DeviceListWidget dLWidg(this->networkAdapter.getAllAdapters());
+
    if(QDialog::DialogCode::Accepted == dLWidg.exec())
    {
       emit Logger::getInstance().log(QString("Selected device: %1").arg(dLWidg.getNameOfSelectedAdapter()), LogWidget::LogLevel::INFO);

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PacketListener.h"
-#include "IPv4Header.h"
+#include "Structures/IPv4Header.h"
 #include "Printer.h"
 
 PacketListener::PacketListener()
@@ -40,12 +40,10 @@ void PacketListener::packetHandling()
       local_tv_sec = header->ts.tv_sec;
       ltime = localtime(&local_tv_sec);
       strftime(timestr, sizeof timestr, "%H:%M:%S", ltime);
-
       ih = (IPv4Header*)(pkt_data + 14);
 
       emit rawPacketSig(QString("Time: %1, len: %2").arg(timestr).arg(header->len));
       emit rawPacketSig(QString("Raw:\n %1").arg(qsn::rawIPv4Desc(*ih).c_str()));
-      //printf("%s,%.6d len:%d\n", timestr, header->ts.tv_usec, header->len);
    }
 }
 

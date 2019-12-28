@@ -62,6 +62,7 @@ void AdapterManager::openAdapter(const std::string& adapterName)
       }
       catch (std::exception& e)
       {
+         //rethrow exception from openAdapter function
          throw e;
       }
 

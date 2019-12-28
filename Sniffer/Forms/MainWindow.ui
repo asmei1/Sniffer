@@ -38,7 +38,7 @@
       <property name="childrenCollapsible">
        <bool>false</bool>
       </property>
-      <widget class="QTableView" name="tableView_packets"/>
+      <widget class="PacketsTableView" name="tableView_packets"/>
       <widget class="QSplitter" name="splitter">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -184,7 +184,12 @@
   <customwidget>
    <class>LogWidget</class>
    <extends>QPlainTextEdit</extends>
-   <header>src/LogWidget.hpp</header>
+   <header>Src/Widgets/LogWidget.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>PacketsTableView</class>
+   <extends>QTableView</extends>
+   <header>Src/Widgets/PacketsTableView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

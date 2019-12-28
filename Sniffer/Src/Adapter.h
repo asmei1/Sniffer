@@ -1,5 +1,5 @@
 #pragma once   
-#include "IPv4Interface.h"
+#include "Structures/IPv4Interface.h"
 #include "stdafx.h"
 
 class Adapter

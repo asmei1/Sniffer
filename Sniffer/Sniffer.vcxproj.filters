@@ -84,12 +84,6 @@
     <ClCompile Include="Src\FilterGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\LogWidget.cpp">
-      <Filter>Widgets</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\DeviceListWidget.cpp">
-      <Filter>Widgets</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Adapter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,10 +93,19 @@
     <ClCompile Include="Src\PacketListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\IPv4Interface.cpp">
+    <ClCompile Include="Src\Widgets\LogWidget.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Widgets\DeviceListWidget.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Widgets\PacketsTableView.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Structures\IPv4Interface.cpp">
       <Filter>Structures</Filter>
     </ClCompile>
-    <ClCompile Include="Src\PacketsModel.cpp">
+    <ClCompile Include="Src\Models\PacketsModel.cpp">
       <Filter>Models</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,19 +113,22 @@
     <QtMoc Include="Src\MainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Src\LogWidget.hpp">
-      <Filter>Widgets</Filter>
-    </QtMoc>
     <QtMoc Include="Src\Logger.hpp">
       <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Src\DeviceListWidget.h">
-      <Filter>Widgets</Filter>
     </QtMoc>
     <QtMoc Include="Src\PacketListener.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Src\PacketsModel.h">
+    <QtMoc Include="Src\Widgets\LogWidget.hpp">
+      <Filter>Widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Widgets\DeviceListWidget.h">
+      <Filter>Widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Widgets\PacketsTableView.h">
+      <Filter>Widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Models\PacketsModel.h">
       <Filter>Models</Filter>
     </QtMoc>
   </ItemGroup>
@@ -133,29 +139,35 @@
     <ClInclude Include="Src\FilterGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\IPv4Address.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\UDPPacket.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Adapter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\AdapterManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\IPv4Header.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\IPv4Interface.h">
-      <Filter>Structures</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\Protocols.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\Printer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\Headers.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\IPv4Address.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\IPv4Header.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\IPv4Interface.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\UDPPacket.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\EthernetHeader.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\Protocols.h">
+      <Filter>Structures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -77,7 +77,8 @@ void Adapter::openAdapter()
 {
    char errorBuff[PCAP_ERRBUF_SIZE] = {};
 
-   pcap_t* temp = pcap_open(this->name.c_str(), PACKET_PART_TO_CAPTURE, PCAP_OPENFLAG_PROMISCUOUS, 1000, NULL, errorBuff);
+   pcap_t* temp = pcap_open(this->name.c_str(), PACKET_PART_TO_CAPTURE, PCAP_OPENFLAG_PROMISCUOUS,
+                 1000, NULL, errorBuff);
    if(nullptr != temp)
    {
       this->adHandler = temp;

@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "LogWidget.hpp"
+#include "Widgets/LogWidget.hpp"
 
 class Logger : public QObject
 {
