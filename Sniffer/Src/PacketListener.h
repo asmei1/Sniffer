@@ -1,28 +1,40 @@
 #pragma once
-#include "Adapter.h"
 #include "stdafx.h"
+#include "Adapter.h"
+#include "Stoppable.h"
 
 namespace qsn
 {
-   class PacketListener : public QObject
+   class PacketListener
    {
-      Q_OBJECT;
    public:
       PacketListener();
-      ~PacketListener() = default;
+      ~PacketListener();
 
       void initListener(const Adapter* openedAdapter);
-      void startListening();
-      void stopListening();
       bool isListening() const;
 
-      void packetHandling();
-   signals:
-      void rawPacketSig(const QString& packet);
 
+      void startListening();
+      void stopListening();
    private:
-      QMutex cancelMutex;
+      class ListeningTask : public Stoppable
+      {
+      public:
+         ListeningTask(const Adapter* adapterToListening)
+            : adapter(adapterToListening)
+         {}
+         void run() override;
+
+      private:
+         const Adapter* adapter;
+      };
+
       bool listening = false;
       const Adapter* adapterToListening = nullptr;
+
+
+      std::thread* listeningThread = nullptr;
+      ListeningTask* listeningTask = nullptr;
    };
 }

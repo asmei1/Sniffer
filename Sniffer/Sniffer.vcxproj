@@ -158,14 +158,16 @@
     <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
     <QtMoc Include="Src\Widgets\PacketsTableView.h" />
     <ClInclude Include="Src\Adapter.h" />
+    <ClInclude Include="Src\Stoppable.h" />
     <ClInclude Include="Src\Structures\EthernetHeader.h" />
     <ClInclude Include="Src\FilterGenerator.h" />
+    <ClInclude Include="Src\Structures\RawPacket.h" />
     <ClInclude Include="Src\Structures\Types.h" />
     <ClInclude Include="Src\Structures\IPv4Interface.h" />
     <ClInclude Include="Src\Structures\IPv4Header.h" />
     <QtMoc Include="Src\Logger.hpp" />
     <ClInclude Include="Src\AdapterManager.h" />
-    <QtMoc Include="Src\PacketListener.h" />
+    <ClInclude Include="Src\PacketListener.h" />
     <QtMoc Include="Src\Models\PacketsModel.h" />
     <ClInclude Include="Src\Printer.h" />
     <ClInclude Include="Src\stdafx.h" />

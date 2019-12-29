@@ -25,6 +25,8 @@ private:
       "Time",
       "Source address",
       "Destination address",
+      "Protocol",
+      "Len",
       "Information",
    };
 

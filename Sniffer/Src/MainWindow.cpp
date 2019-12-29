@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
       emit Logger::getInstance().log(e.what(), LogWidget::LogLevel::ERR);
    }
 
-   connect(&this->packetListener, &qsn::PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
+   //connect(&this->packetListener, &qsn::PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
 
    this->packetsModel = new PacketsModel(this);
    this->ui->tableView_packets->setModel(this->packetsModel);
@@ -38,10 +38,6 @@ MainWindow::~MainWindow()
 {
    delete this->packetsModel;
 
-   if(true == this->packetListener.isListening())
-   {
-      this->packetListener.stopListening();
-   }
    delete this->ui;
 }
 
@@ -62,14 +58,12 @@ void MainWindow::on_actionStart_listening_triggered()
 {
    this->packetListener.initListener(this->networkAdapter.getOpenedAdapter());
    this->packetListener.startListening();
-   emit Logger::getInstance().log(QString("Start listening..."), LogWidget::LogLevel::INFO);
 }
 
 
 void MainWindow::on_actionStop_listening_triggered()
 {
    this->packetListener.stopListening();
-   emit Logger::getInstance().log(QString("Stop listening..."), LogWidget::LogLevel::INFO);
 }
 
 void MainWindow::openSelectedAdapter(const std::string& adapterName)

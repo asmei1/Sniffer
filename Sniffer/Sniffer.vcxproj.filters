@@ -116,9 +116,6 @@
     <QtMoc Include="Src\Logger.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Src\PacketListener.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Src\Widgets\LogWidget.hpp">
       <Filter>Widgets</Filter>
     </QtMoc>
@@ -162,6 +159,15 @@
     </ClInclude>
     <ClInclude Include="Src\Structures\UDPHeader.h">
       <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\PacketListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Structures\RawPacket.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Stoppable.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
