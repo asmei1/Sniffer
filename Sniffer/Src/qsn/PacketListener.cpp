@@ -8,8 +8,9 @@
 
 using namespace qsn;
 
-PacketListener::PacketListener()
+PacketListener::PacketListener(PacketsStash* packetsStash)
 {
+   this->packetsStash = packetsStash;
 }
 
 PacketListener::~PacketListener()
@@ -37,7 +38,7 @@ void PacketListener::startListening()
    {
       this->listening = true;
 
-      this->listeningTask = new ListeningTask(this->adapterToListening);
+      this->listeningTask = new ListeningTask(this->adapterToListening, this->packetsStash);
       this->listeningThread = new std::thread([&]()
       {
             this->listeningTask->run();
@@ -99,19 +100,19 @@ void PacketListener::ListeningTask::run()
          continue;
       }
 
-      RawPacket rV = RawPacket::of(header, pkt_data);
+      this->stash->appendPacket(RawPacket::of(header, pkt_data));
 
-      /*sport = ntohs(ih->);
-      dport = ntohs(uh->dport);*/
+      ///*sport = ntohs(ih->);
+      //dport = ntohs(uh->dport);*/
 
-      /* convert the timestamp to readable format */
-      local_tv_sec = header->ts.tv_sec;
-      ltime = localtime(&local_tv_sec);
-      strftime(timestr, sizeof timestr, "%H:%M:%S", ltime);
-      //eH = (qsn::EthernetHeader*)(pkt_data);
-      //ih = (qsn::IPv4Header*)(pkt_data + 14);
+      ///* convert the timestamp to readable format */
+      //local_tv_sec = header->ts.tv_sec;
+      //ltime = localtime(&local_tv_sec);
+      //strftime(timestr, sizeof timestr, "%H:%M:%S", ltime);
+      ////eH = (qsn::EthernetHeader*)(pkt_data);
+      ////ih = (qsn::IPv4Header*)(pkt_data + 14);
 
-      qDebug() << (QString("Time: %1, len: %2").arg(timestr).arg(header->len));
+      //qDebug() << (QString("Time: %1, len: %2").arg(timestr).arg(header->len));
       /*emit rawPacketSig(QString("Raw:\n%1\n%2")
          .arg(qsn::ethernetHeader2String(*eH).c_str())
          .arg(qsn::rawIPv4Desc(*ih).c_str()));*/

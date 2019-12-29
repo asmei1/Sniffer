@@ -45,14 +45,17 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Structures">
-      <UniqueIdentifier>{7915ec52-a104-40df-9016-f26ec68415d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Widgets">
       <UniqueIdentifier>{1a0bc2f8-70dc-43c5-ab86-2712d97eede5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Models">
       <UniqueIdentifier>{31511009-1f03-4038-9dc9-c8902f24425d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qsn">
+      <UniqueIdentifier>{66e750ba-fb91-4712-91ac-1ee6edc69755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qsn\Structures">
+      <UniqueIdentifier>{7915ec52-a104-40df-9016-f26ec68415d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,18 +84,6 @@
     <ClCompile Include="Src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\FilterGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Adapter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\AdapterManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\PacketListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Widgets\LogWidget.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
@@ -102,18 +93,30 @@
     <ClCompile Include="Src\Widgets\PacketsTableView.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Structures\IPv4Interface.cpp">
-      <Filter>Structures</Filter>
-    </ClCompile>
     <ClCompile Include="Src\Models\PacketsModel.cpp">
       <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\Structures\IPv4Interface.cpp">
+      <Filter>qsn\Structures</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\PacketListener.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\FilterGenerator.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\AdapterManager.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\Adapter.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\PacketsStash.cpp">
+      <Filter>qsn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Src\MainWindow.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Src\Logger.hpp">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Src\Widgets\LogWidget.hpp">
@@ -128,46 +131,52 @@
     <QtMoc Include="Src\Models\PacketsModel.h">
       <Filter>Models</Filter>
     </QtMoc>
+    <QtMoc Include="Src\qsn\Logger.hpp">
+      <Filter>qsn</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\FilterGenerator.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Structures\EthernetHeader.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Adapter.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Structures\IPv4Header.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\AdapterManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Structures\IPv4Interface.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Printer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Structures\RawPacket.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\IPv4Header.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\Structures\Types.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\IPv4Interface.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\Structures\UDPHeader.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\EthernetHeader.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\Printer.h">
+      <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\Types.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\Stoppable.h">
+      <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\UDPHeader.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\PacketListener.h">
+      <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\PacketListener.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\FilterGenerator.h">
+      <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Structures\RawPacket.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\AdapterManager.h">
+      <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Stoppable.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Adapter.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\PacketsStash.h">
+      <Filter>qsn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

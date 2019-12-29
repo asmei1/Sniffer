@@ -2,13 +2,14 @@
 #include "stdafx.h"
 #include "Adapter.h"
 #include "Stoppable.h"
+#include "PacketsStash.h"
 
 namespace qsn
 {
    class PacketListener
    {
    public:
-      PacketListener();
+      PacketListener(PacketsStash* packetsStash);
       ~PacketListener();
 
       void initListener(const Adapter* openedAdapter);
@@ -21,18 +22,19 @@ namespace qsn
       class ListeningTask : public Stoppable
       {
       public:
-         ListeningTask(const Adapter* adapterToListening)
-            : adapter(adapterToListening)
+         ListeningTask(const Adapter* adapterToListening, PacketsStash* packetsStash)
+            : adapter(adapterToListening), stash(packetsStash)
          {}
          void run() override;
 
       private:
          const Adapter* adapter;
+         PacketsStash* stash;
       };
 
       bool listening = false;
       const Adapter* adapterToListening = nullptr;
-
+      PacketsStash* packetsStash = nullptr;
 
       std::thread* listeningThread = nullptr;
       ListeningTask* listeningTask = nullptr;

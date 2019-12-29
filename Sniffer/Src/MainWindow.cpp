@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
 
    //connect(&this->packetListener, &qsn::PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
 
+
+   this->packetListener = new qsn::PacketListener(new qsn::PacketsStash);
+
    this->packetsModel = new PacketsModel(this);
    this->ui->tableView_packets->setModel(this->packetsModel);
 
@@ -37,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
    delete this->packetsModel;
+   delete this->packetListener;
 
    delete this->ui;
 }
@@ -56,14 +60,14 @@ void MainWindow::on_actionShow_device_list_triggered()
 
 void MainWindow::on_actionStart_listening_triggered()
 {
-   this->packetListener.initListener(this->networkAdapter.getOpenedAdapter());
-   this->packetListener.startListening();
+   this->packetListener->initListener(this->networkAdapter.getOpenedAdapter());
+   this->packetListener->startListening();
 }
 
 
 void MainWindow::on_actionStop_listening_triggered()
 {
-   this->packetListener.stopListening();
+   this->packetListener->stopListening();
 }
 
 void MainWindow::openSelectedAdapter(const std::string& adapterName)
