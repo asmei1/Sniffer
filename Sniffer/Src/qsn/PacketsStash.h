@@ -16,6 +16,8 @@ namespace qsn
 
       const std::vector<RawPacket*>& getPackets() const;
 
+      int getPacketsCount() const;
+
    private:
       mutable std::mutex mutex;
       std::vector<RawPacket*> packets;

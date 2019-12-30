@@ -38,3 +38,8 @@ const std::vector<RawPacket*>& PacketsStash::getPackets() const
 
    return this->packets;
 }
+
+int PacketsStash::getPacketsCount() const
+{
+   return this->packets.size();
+}

@@ -5,6 +5,7 @@
 #include "Widgets/DeviceListWidget.h"
 #include "Models/PacketsModel.h"
 #include <QDebug>
+#include "Models/PacketsQStash.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -28,12 +29,12 @@ MainWindow::MainWindow(QWidget *parent)
 
    //connect(&this->packetListener, &qsn::PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
 
+   auto test = new PacketsQStash();
+   this->packetListener = new qsn::PacketListener(test);
 
-   this->packetListener = new qsn::PacketListener(new qsn::PacketsStash);
-
-   this->packetsModel = new PacketsModel(this);
+   this->packetsModel = new PacketsModel(test, this);
    this->ui->tableView_packets->setModel(this->packetsModel);
-
+   
    //on_actionShow_device_list_triggered();
 }
 

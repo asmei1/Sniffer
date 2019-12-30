@@ -2,11 +2,13 @@
 #include "stdafx.h"
 #include <QAbstractTableModel>
 
+class PacketsQStash;
+
 class PacketsModel : public QAbstractTableModel
 {
    Q_OBJECT;
 public:
-   PacketsModel(QObject* parent = nullptr);
+   PacketsModel(PacketsQStash* packets, QObject* parent = nullptr);
    ~PacketsModel() = default;
 
    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
@@ -29,6 +31,6 @@ private:
       "Len",
       "Information",
    };
-
+   PacketsQStash* packets = nullptr;
 };
 

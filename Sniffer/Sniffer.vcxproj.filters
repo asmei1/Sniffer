@@ -114,6 +114,9 @@
     <ClCompile Include="Src\qsn\PacketsStash.cpp">
       <Filter>qsn</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Models\PacketsQStash.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Src\MainWindow.h">
@@ -133,6 +136,9 @@
     </QtMoc>
     <QtMoc Include="Src\qsn\Logger.hpp">
       <Filter>qsn</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Models\PacketsQStash.h">
+      <Filter>Models</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
