@@ -23,6 +23,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
@@ -52,12 +54,12 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>charts;core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>msvc5_12_6__2017_64_</QtInstall>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>charts;core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>msvc5_12_6__2017_64_</QtInstall>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -88,6 +90,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\npcap\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;Packet.lib;wpcap.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>wpcap.dll</DelayLoadDLLs>
     </Link>
     <QtUic>
       <QtUicFileName>ui_%(Filename).h</QtUicFileName>
@@ -96,10 +99,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtMoc>
       <PrependInclude>stdafx.h</PrependInclude>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </QtMoc>
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat />
+      <DebugInformationFormat>None</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -108,9 +112,13 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libs\npcap\Include;$(ProjectDir)GeneratedFiles\$(ConfigurationName);$(ProjectDir)GeneratedFiles;$(ProjectDir)Src;$(ProjectDir)Src\qsn;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Programowanie\Cpp\Sniffer\Libs\npcap\Include;$(ProjectDir)GeneratedFiles\$(ConfigurationName);$(ProjectDir)GeneratedFiles;$(ProjectDir)Src;$(ProjectDir)Src\qsn;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -118,9 +126,15 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\npcap\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;Packet.lib;wpcap.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <NoEntryPoint>false</NoEntryPoint>
+      <LinkStatus>false</LinkStatus>
+      <DelayLoadDLLs>wpcap.dll</DelayLoadDLLs>
     </Link>
     <QtUic>
       <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+      <DisplayDependencies>false</DisplayDependencies>
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -134,7 +148,7 @@
     <QtUic Include="Forms\MainWindow.ui" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Models\PacketsQStash.cpp" />
+    <ClCompile Include="Src\qsn\Interpreter.cpp" />
     <ClCompile Include="Src\qsn\PacketsStash.cpp" />
     <ClCompile Include="Src\Widgets\PacketsTableView.cpp" />
     <ClCompile Include="Src\qsn\Adapter.cpp" />
@@ -159,7 +173,8 @@
     <QtMoc Include="Src\Widgets\LogWidget.hpp" />
     <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
     <QtMoc Include="Src\Widgets\PacketsTableView.h" />
-    <QtMoc Include="Src\Models\PacketsQStash.h" />
+    <ClInclude Include="Src\qsn\Helper.h" />
+    <ClInclude Include="Src\qsn\Interpreter.h" />
     <ClInclude Include="Src\qsn\PacketsStash.h" />
     <ClInclude Include="Src\qsn\Adapter.h" />
     <ClInclude Include="Src\qsn\Stoppable.h" />

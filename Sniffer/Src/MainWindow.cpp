@@ -5,15 +5,40 @@
 #include "Widgets/DeviceListWidget.h"
 #include "Models/PacketsModel.h"
 #include <QDebug>
-#include "Models/PacketsQStash.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+void MainWindow::prepareStatusBarWidgets()
+{
+   this->statusBarPermanentWidget = new QWidget;
+   this->statusBarPermanentWidget->setFixedHeight(20);
+   this->openedAdapterLabel = new QLabel("None");
+   this->statusListenerLabel = new QLabel;
+   this->statusListenerLabel->setPixmap(QPixmap(":/gray_circle"));
+   this->statusListenerLabel->setToolTip("Not selected adapter to listening");
+   auto pernamentWidgetLayout = new QHBoxLayout;
+   pernamentWidgetLayout->setMargin(0);
+   pernamentWidgetLayout->setContentsMargins(0, 0, 0, 0);
+   pernamentWidgetLayout->addWidget(this->openedAdapterLabel);
+   pernamentWidgetLayout->addWidget(this->statusListenerLabel);
+   this->statusBarPermanentWidget->setLayout(pernamentWidgetLayout);
+   this->statusBar()->addPermanentWidget(this->statusBarPermanentWidget);
+}
+
+MainWindow::MainWindow(QWidget* parent)
+   : QMainWindow(parent), ui(new Ui::MainWindow)
 {
    this->ui->setupUi(this);
    this->ui->actionStart_listening->setEnabled(false);
    this->ui->actionStop_listening->setEnabled(false);
+   this->ui->dockWidget_logger->hide();
 
+   prepareStatusBarWidgets();
+
+
+#ifdef _DEBUG
+   this->ui->dockWidget_logger->show();
+#endif
+
+   this->ui->actionLog_window->setChecked(this->ui->dockWidget_logger->isVisible());
 
    connect(&Logger::getInstance(), &Logger::log, this->ui->logWidget, &LogWidget::logQStr);
 
@@ -22,26 +47,29 @@ MainWindow::MainWindow(QWidget *parent)
       this->networkAdapter.loadAllDevices();
       emit Logger::getInstance().log(QString("Found %1 devices.").arg(this->networkAdapter.getAllAdapters().size()), LogWidget::LogLevel::INFO);
    }
-   catch(const std::exception& e)
+   catch(const std::exception & e)
    {
       emit Logger::getInstance().log(e.what(), LogWidget::LogLevel::ERR);
    }
 
    //connect(&this->packetListener, &qsn::PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
 
-   auto test = new PacketsQStash();
-   this->packetListener = new qsn::PacketListener(test);
+   this->packetsModel = new PacketsModel(this);
+   this->packetListener = new qsn::PacketListener(this->packetsModel);
 
-   this->packetsModel = new PacketsModel(test, this);
    this->ui->tableView_packets->setModel(this->packetsModel);
-   
+
    //on_actionShow_device_list_triggered();
+
 }
 
 MainWindow::~MainWindow()
 {
-   delete this->packetsModel;
    delete this->packetListener;
+   delete this->packetsModel;
+   delete this->statusListenerLabel;
+   delete this->openedAdapterLabel;
+   delete this->statusBarPermanentWidget;
 
    delete this->ui;
 }
@@ -62,13 +90,21 @@ void MainWindow::on_actionShow_device_list_triggered()
 void MainWindow::on_actionStart_listening_triggered()
 {
    this->packetListener->initListener(this->networkAdapter.getOpenedAdapter());
+   if(nullptr != this->packetsModel)
+   {
+      this->packetsModel->clear();
+   }
    this->packetListener->startListening();
+   this->statusListenerLabel->setPixmap(QPixmap(":/green_circle"));
+   this->statusListenerLabel->setToolTip("Listening");
 }
 
 
 void MainWindow::on_actionStop_listening_triggered()
 {
    this->packetListener->stopListening();
+   this->statusListenerLabel->setPixmap(QPixmap(":/red_circle"));
+   this->statusListenerLabel->setToolTip("Stopped");
 }
 
 void MainWindow::openSelectedAdapter(const std::string& adapterName)
@@ -81,8 +117,8 @@ void MainWindow::openSelectedAdapter(const std::string& adapterName)
       const auto* adapter = this->networkAdapter.getOpenedAdapter();
 
       //set label
-      this->ui->label_openedAdapter->setToolTip(adapter->getFullDescription().c_str());
-      this->ui->label_openedAdapter->setText(QString("Opened adapter: ") + adapter->getName().c_str());
+      this->openedAdapterLabel->setToolTip(adapter->getFullDescription().c_str());
+      this->openedAdapterLabel->setText(adapter->getName().c_str());
 
       //enable actions
       this->ui->actionStart_listening->setEnabled(true);
@@ -90,8 +126,25 @@ void MainWindow::openSelectedAdapter(const std::string& adapterName)
 
       emit Logger::getInstance().log(QString("Adapter %1 opened successfully.").arg(adapter->getName().c_str()), LogWidget::LogLevel::INFO);
    }
-   catch (const std::exception& e)
+   catch(const std::exception & e)
    {
       emit Logger::getInstance().log(QString("Error during opening adapter: %1").arg(e.what()), LogWidget::LogLevel::ERR);
+   }
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+   QApplication::quit();
+}
+
+void MainWindow::on_actionLog_window_triggered()
+{
+   if(true == this->ui->actionLog_window->isChecked())
+   {
+      this->ui->dockWidget_logger->show();
+   }
+   else
+   {
+      this->ui->dockWidget_logger->hide();
    }
 }

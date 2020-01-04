@@ -114,8 +114,8 @@
     <ClCompile Include="Src\qsn\PacketsStash.cpp">
       <Filter>qsn</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Models\PacketsQStash.cpp">
-      <Filter>Models</Filter>
+    <ClCompile Include="Src\qsn\Interpreter.cpp">
+      <Filter>qsn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,9 +136,6 @@
     </QtMoc>
     <QtMoc Include="Src\qsn\Logger.hpp">
       <Filter>qsn</Filter>
-    </QtMoc>
-    <QtMoc Include="Src\Models\PacketsQStash.h">
-      <Filter>Models</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +179,12 @@
       <Filter>qsn</Filter>
     </ClInclude>
     <ClInclude Include="Src\qsn\PacketsStash.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Interpreter.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Helper.h">
       <Filter>qsn</Filter>
     </ClInclude>
   </ItemGroup>
