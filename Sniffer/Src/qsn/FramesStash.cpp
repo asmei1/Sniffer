@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "PacketsStash.h"
-#include <QDebug>
+#include "FramesStash.h"
+//#include <QDebug>
 
 using namespace qsn;
 
-void PacketsStash::appendPacket(RawPacket* packet)
+void FramesStash::appendPacket(RawFrame* packet)
 {
    std::lock_guard<std::mutex> guard(mutex);
 
    this->packets.push_back(packet);
-   qDebug() << packet->caplen;
+   //qDebug() << packet->caplen;
 }
 
-void PacketsStash::clear()
+void FramesStash::clear()
 {
    std::lock_guard<std::mutex> guard(mutex);
 
@@ -23,7 +23,7 @@ void PacketsStash::clear()
    packets.clear();
 }
 
-RawPacket* PacketsStash::getPacket(int index) const
+RawFrame* FramesStash::getPacket(int index) const
 {
    std::lock_guard<std::mutex> guard(mutex);
 
@@ -32,14 +32,14 @@ RawPacket* PacketsStash::getPacket(int index) const
    return this->packets.at(index);
 }
 
-const std::vector<RawPacket*>& PacketsStash::getPackets() const
+const std::vector<RawFrame*>& FramesStash::getPackets() const
 {
    std::lock_guard<std::mutex> guard(mutex);
 
    return this->packets;
 }
 
-int PacketsStash::getPacketsCount() const
+int FramesStash::getPacketsCount() const
 {
    return this->packets.size();
 }

@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "Logger.hpp"
+#include "Utils/Logger.hpp"
 #include "Widgets/DeviceListWidget.h"
-#include "Models/PacketsModel.h"
+#include "Models/FramesModel.h"
 #include <QDebug>
 
 void MainWindow::prepareStatusBarWidgets()
@@ -52,10 +52,10 @@ MainWindow::MainWindow(QWidget* parent)
       emit Logger::getInstance().log(e.what(), LogWidget::LogLevel::ERR);
    }
 
-   //connect(&this->packetListener, &qsn::PacketListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
+   //connect(&this->packetListener, &qsn::FrameListener::rawPacketSig, this->ui->plainTextEdit_tempInfoBox, &QPlainTextEdit::appendPlainText);
 
-   this->packetsModel = new PacketsModel(this);
-   this->packetListener = new qsn::PacketListener(this->packetsModel);
+   this->packetsModel = new FramesModel(this);
+   this->packetListener = new qsn::FrameListener(this->packetsModel);
 
    this->ui->tableView_packets->setModel(this->packetsModel);
 
@@ -90,10 +90,7 @@ void MainWindow::on_actionShow_device_list_triggered()
 void MainWindow::on_actionStart_listening_triggered()
 {
    this->packetListener->initListener(this->networkAdapter.getOpenedAdapter());
-   if(nullptr != this->packetsModel)
-   {
-      this->packetsModel->clear();
-   }
+   on_actionClear_all_packets_triggered();
    this->packetListener->startListening();
    this->statusListenerLabel->setPixmap(QPixmap(":/green_circle"));
    this->statusListenerLabel->setToolTip("Listening");
@@ -147,4 +144,28 @@ void MainWindow::on_actionLog_window_triggered()
    {
       this->ui->dockWidget_logger->hide();
    }
+}
+
+void MainWindow::on_tableView_packets_clicked(const QModelIndex &index)
+{
+   if(true == index.isValid())
+   {
+      this->ui->plainTextEdit_hexContent->setPlainText(this->packetsModel->data(index, FramesModel::PacketsInfo::HEX_CONTENT).toString());
+      this->ui->plainTextEdit_asciiContent->setPlainText(this->packetsModel->data(index, FramesModel::PacketsInfo::ASCII_CONTENT).toString());
+   }
+   else
+   {
+      QApplication::beep();
+   }
+}
+
+void MainWindow::on_actionClear_all_packets_triggered()
+{
+   if(nullptr != this->packetsModel)
+   {
+      this->packetsModel->clear();
+   }
+
+   this->ui->plainTextEdit_asciiContent->clear();
+   this->ui->plainTextEdit_hexContent->clear();
 }

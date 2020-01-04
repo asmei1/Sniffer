@@ -149,7 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\qsn\Interpreter.cpp" />
-    <ClCompile Include="Src\qsn\PacketsStash.cpp" />
+    <ClCompile Include="Src\qsn\FramesStash.cpp" />
     <ClCompile Include="Src\Widgets\PacketsTableView.cpp" />
     <ClCompile Include="Src\qsn\Adapter.cpp" />
     <ClCompile Include="Src\Widgets\DeviceListWidget.cpp" />
@@ -159,35 +159,40 @@
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
     <ClCompile Include="Src\qsn\AdapterManager.cpp" />
-    <ClCompile Include="Src\qsn\PacketListener.cpp" />
-    <ClCompile Include="Src\Models\PacketsModel.cpp" />
+    <ClCompile Include="Src\qsn\FrameListener.cpp" />
+    <ClCompile Include="Src\Models\FramesModel.cpp" />
     <ClCompile Include="Src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TimeFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Src\MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\qsn\Frame.h" />
+    <ClInclude Include="Src\qsn\Packet.h" />
+    <ClInclude Include="Src\qsn\Segment.h" />
+    <ClInclude Include="TimeFormatter.h" />
     <QtMoc Include="Src\Widgets\LogWidget.hpp" />
     <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
-    <QtMoc Include="Src\Widgets\PacketsTableView.h" />
-    <ClInclude Include="Src\qsn\Helper.h" />
+    <QtMoc Include="Src\Widgets\FramesTableView.h" />
+    <ClInclude Include="Src\qsn\Utils\Helper.h" />
     <ClInclude Include="Src\qsn\Interpreter.h" />
-    <ClInclude Include="Src\qsn\PacketsStash.h" />
+    <ClInclude Include="Src\qsn\FramesStash.h" />
     <ClInclude Include="Src\qsn\Adapter.h" />
-    <ClInclude Include="Src\qsn\Stoppable.h" />
+    <ClInclude Include="Src\qsn\Utils\Stoppable.h" />
     <ClInclude Include="Src\qsn\Structures\EthernetHeader.h" />
     <ClInclude Include="Src\qsn\FilterGenerator.h" />
-    <ClInclude Include="Src\qsn\Structures\RawPacket.h" />
+    <ClInclude Include="Src\qsn\Structures\RawFrame.h" />
     <ClInclude Include="Src\qsn\Structures\Types.h" />
     <ClInclude Include="Src\qsn\Structures\IPv4Interface.h" />
     <ClInclude Include="Src\qsn\Structures\IPv4Header.h" />
-    <QtMoc Include="Src\qsn\Logger.hpp" />
+    <QtMoc Include="Src\qsn\Utils\Logger.hpp" />
     <ClInclude Include="Src\qsn\AdapterManager.h" />
-    <ClInclude Include="Src\qsn\PacketListener.h" />
-    <QtMoc Include="Src\Models\PacketsModel.h" />
+    <ClInclude Include="Src\qsn\FrameListener.h" />
+    <QtMoc Include="Src\Models\FramesModel.h" />
     <ClInclude Include="Src\qsn\Printer.h" />
     <ClInclude Include="Src\stdafx.h" />
     <ClInclude Include="Src\qsn\Structures\UDPHeader.h" />

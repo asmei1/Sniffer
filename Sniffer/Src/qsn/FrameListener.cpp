@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "PacketListener.h"
+#include "FrameListener.h"
 #include "Structures/IPv4Header.h"
 #include "Structures/EthernetHeader.h"
 #include "Printer.h"
-#include "Structures/RawPacket.h"
-#include "Logger.hpp"
+#include "Structures/RawFrame.h"
+#include "Utils/Logger.hpp"
 
 using namespace qsn;
 
-PacketListener::PacketListener(PacketsStash* packetsStash)
+FrameListener::FrameListener(FramesStash* packetsStash)
 {
    this->packetsStash = packetsStash;
 }
 
-PacketListener::~PacketListener()
+FrameListener::~FrameListener()
 {
    if(true == isListening())
    {
@@ -22,12 +22,12 @@ PacketListener::~PacketListener()
 }
 
 
-void PacketListener::initListener(const Adapter* openedAdapter)
+void FrameListener::initListener(const Adapter* openedAdapter)
 {
    this->adapterToListening = openedAdapter;
 }
 
-void PacketListener::startListening()
+void FrameListener::startListening()
 {
    assert(nullptr != this->adapterToListening && "Adapter cannot be null!");
    if(true == this->listening)
@@ -48,7 +48,7 @@ void PacketListener::startListening()
    }
 }
 
-void PacketListener::stopListening()
+void FrameListener::stopListening()
 {
    assert(nullptr != this->adapterToListening && "Adapter cannot be null!");
    if(false == this->listening)
@@ -69,12 +69,12 @@ void PacketListener::stopListening()
 
 }
 
-bool PacketListener::isListening() const
+bool FrameListener::isListening() const
 {
    return this->listening;
 }
 
-void PacketListener::ListeningTask::run()
+void FrameListener::ListeningTask::run()
 {
    int res;
    pcap_pkthdr* header;
@@ -86,12 +86,12 @@ void PacketListener::ListeningTask::run()
    const u_char* pkt_data;
    u_short sport, dport;
    time_t local_tv_sec;
-
+   
    while((res = pcap_next_ex(adapter->getRawHandler(), &header, &pkt_data)) >= 0)
    {
       if(true == stopRequested())
       {
-         break;
+         pcap_breakloop(adapter->getRawHandler());
       }
 
       if(res == 0)
@@ -100,7 +100,7 @@ void PacketListener::ListeningTask::run()
          continue;
       }
 
-      this->stash->appendPacket(RawPacket::of(header, pkt_data));
+      this->stash->appendPacket(RawFrame::of(header, pkt_data));
 
       ///*sport = ntohs(ih->);
       //dport = ntohs(uh->dport);*/
@@ -110,8 +110,9 @@ void PacketListener::ListeningTask::run()
       //ltime = localtime(&local_tv_sec);
       //strftime(timestr, sizeof timestr, "%H:%M:%S", ltime);
       ////eH = (qsn::EthernetHeader*)(pkt_data);
-      ////ih = (qsn::IPv4Header*)(pkt_data + 14);
-
+      /*ih = (qsn::IPv4Header*)(pkt_data + 14);
+      qDebug() << (qsn::rawIPv4Desc(*ih).c_str());
+      qDebug() << "\n";*/
       //qDebug() << (QString("Time: %1, len: %2").arg(timestr).arg(header->len));
       /*emit rawPacketSig(QString("Raw:\n%1\n%2")
          .arg(qsn::ethernetHeader2String(*eH).c_str())

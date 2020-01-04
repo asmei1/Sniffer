@@ -1,16 +1,16 @@
 #pragma once
 #include "stdafx.h"
 #include "Adapter.h"
-#include "Stoppable.h"
-#include "PacketsStash.h"
+#include "Utils/Stoppable.h"
+#include "FramesStash.h"
 
 namespace qsn
 {
-   class PacketListener
+   class FrameListener
    {
    public:
-      PacketListener(PacketsStash* packetsStash);
-      ~PacketListener();
+      FrameListener(FramesStash* packetsStash);
+      ~FrameListener();
 
       void initListener(const Adapter* openedAdapter);
       bool isListening() const;
@@ -22,19 +22,19 @@ namespace qsn
       class ListeningTask : public Stoppable
       {
       public:
-         ListeningTask(const Adapter* adapterToListening, PacketsStash* packetsStash)
+         ListeningTask(const Adapter* adapterToListening, FramesStash* packetsStash)
             : adapter(adapterToListening), stash(packetsStash)
          {}
          void run() override;
 
       private:
          const Adapter* adapter;
-         PacketsStash* stash;
+         FramesStash* stash;
       };
 
       bool listening = false;
       const Adapter* adapterToListening = nullptr;
-      PacketsStash* packetsStash = nullptr;
+      FramesStash* packetsStash = nullptr;
 
       std::thread* listeningThread = nullptr;
       ListeningTask* listeningTask = nullptr;

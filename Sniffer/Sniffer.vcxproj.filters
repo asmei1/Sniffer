@@ -57,6 +57,9 @@
     <Filter Include="qsn\Structures">
       <UniqueIdentifier>{7915ec52-a104-40df-9016-f26ec68415d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="qsn\Utils">
+      <UniqueIdentifier>{cce4703e-522b-46b4-968b-f1b26353c0db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Sniffer.qrc">
@@ -93,14 +96,8 @@
     <ClCompile Include="Src\Widgets\PacketsTableView.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Models\PacketsModel.cpp">
-      <Filter>Models</Filter>
-    </ClCompile>
     <ClCompile Include="Src\qsn\Structures\IPv4Interface.cpp">
       <Filter>qsn\Structures</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\qsn\PacketListener.cpp">
-      <Filter>qsn</Filter>
     </ClCompile>
     <ClCompile Include="Src\qsn\FilterGenerator.cpp">
       <Filter>qsn</Filter>
@@ -111,10 +108,19 @@
     <ClCompile Include="Src\qsn\Adapter.cpp">
       <Filter>qsn</Filter>
     </ClCompile>
-    <ClCompile Include="Src\qsn\PacketsStash.cpp">
+    <ClCompile Include="Src\qsn\Interpreter.cpp">
       <Filter>qsn</Filter>
     </ClCompile>
-    <ClCompile Include="Src\qsn\Interpreter.cpp">
+    <ClCompile Include="TimeFormatter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\FrameListener.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Models\FramesModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\FramesStash.cpp">
       <Filter>qsn</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,14 +134,14 @@
     <QtMoc Include="Src\Widgets\DeviceListWidget.h">
       <Filter>Widgets</Filter>
     </QtMoc>
-    <QtMoc Include="Src\Widgets\PacketsTableView.h">
+    <QtMoc Include="Src\qsn\Utils\Logger.hpp">
+      <Filter>qsn\Utils</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Widgets\FramesTableView.h">
       <Filter>Widgets</Filter>
     </QtMoc>
-    <QtMoc Include="Src\Models\PacketsModel.h">
+    <QtMoc Include="Src\Models\FramesModel.h">
       <Filter>Models</Filter>
-    </QtMoc>
-    <QtMoc Include="Src\qsn\Logger.hpp">
-      <Filter>qsn</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +157,6 @@
     <ClInclude Include="Src\qsn\Structures\IPv4Interface.h">
       <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\qsn\Structures\RawPacket.h">
-      <Filter>qsn\Structures</Filter>
-    </ClInclude>
     <ClInclude Include="Src\qsn\Structures\Types.h">
       <Filter>qsn\Structures</Filter>
     </ClInclude>
@@ -161,12 +164,6 @@
       <Filter>qsn\Structures</Filter>
     </ClInclude>
     <ClInclude Include="Src\qsn\Printer.h">
-      <Filter>qsn</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\qsn\Stoppable.h">
-      <Filter>qsn</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\qsn\PacketListener.h">
       <Filter>qsn</Filter>
     </ClInclude>
     <ClInclude Include="Src\qsn\FilterGenerator.h">
@@ -178,13 +175,34 @@
     <ClInclude Include="Src\qsn\Adapter.h">
       <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\qsn\PacketsStash.h">
-      <Filter>qsn</Filter>
-    </ClInclude>
     <ClInclude Include="Src\qsn\Interpreter.h">
       <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\qsn\Helper.h">
+    <ClInclude Include="Src\qsn\Utils\Helper.h">
+      <Filter>qsn\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Utils\Stoppable.h">
+      <Filter>qsn\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Frame.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Packet.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Segment.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Structures\RawFrame.h">
+      <Filter>qsn\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\FrameListener.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\FramesStash.h">
       <Filter>qsn</Filter>
     </ClInclude>
   </ItemGroup>

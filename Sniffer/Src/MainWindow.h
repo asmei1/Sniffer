@@ -2,9 +2,9 @@
 #include <QMainWindow>
 
 #include "AdapterManager.h"
-#include "PacketListener.h"
+#include "FrameListener.h"
 
-class PacketsModel;
+class FramesModel;
 
 namespace Ui { class MainWindow; }
 
@@ -28,6 +28,10 @@ private slots:
 
    void on_actionLog_window_triggered();
 
+   void on_tableView_packets_clicked(const QModelIndex &index);
+
+   void on_actionClear_all_packets_triggered();
+
 private:
    void openSelectedAdapter(const std::string& adapterName);
 
@@ -39,7 +43,7 @@ private:
 
 
 
-   qsn::PacketListener* packetListener = nullptr;
+   qsn::FrameListener* packetListener = nullptr;
    qsn::AdapterManager networkAdapter;
-   PacketsModel* packetsModel = nullptr;
+   FramesModel* packetsModel = nullptr;
 };

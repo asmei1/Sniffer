@@ -12,10 +12,53 @@ namespace qsn
       std::stringstream ss;
       for(size_t i = 0; i < mac.size(); i++)
       {
-         ss << std::hex << std::setw(2) << static_cast<int>(mac[i]);
+         ss << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(mac[i]);
          if(i + 1 < mac.size())
          {
             ss << delimiter;
+         }
+      }
+
+      return ss.str();
+   }
+
+   static std::string rawData2Hex(const u_char* data, int size, const std::string& delimiter = " ", int nextLineCharsCount = 16)
+   {
+      std::stringstream ss;
+      for(size_t i = 0; i < size; i++)
+      {
+         ss << std::uppercase << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(data[i]);
+         
+         if(i + 1 < size)
+         {
+            ss << delimiter;
+         }
+         if(i > 0 && i % nextLineCharsCount == 0)
+         {
+            ss << "\n";
+         }
+      }
+
+      return ss.str();
+   }
+
+   static std::string rawData2String(const u_char* data, int size, bool replaceNotPrintableCharacters = true, int nextLineCharsCount = 16)
+   {
+      std::stringstream ss;
+      for(size_t i = 0; i < size; i++)
+      {
+         if(true == replaceNotPrintableCharacters && false == isprint(data[i]))
+         {
+            ss << '.';
+         }
+         else
+         {
+            ss << data[i];
+         }
+         
+         if(i > 0 && i % nextLineCharsCount == 0)
+         {
+            ss << '\n';
          }
       }
 
