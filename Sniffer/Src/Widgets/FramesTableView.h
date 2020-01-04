@@ -1,11 +1,11 @@
 #pragma once
 #include <QTableView>
-class PacketsTableView : public QTableView
+class FramesTableView : public QTableView
 {
    Q_OBJECT;
 public:
-   PacketsTableView(QWidget* parent = nullptr);
-   ~PacketsTableView() = default;
+   FramesTableView(QWidget* parent = nullptr);
+   ~FramesTableView() = default;
 
 
    void setModel(QAbstractItemModel* model) override;

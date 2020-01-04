@@ -3,14 +3,14 @@
 #include "FramesTableView.h"
 #include "Models/FramesModel.h"
 
-PacketsTableView::PacketsTableView(QWidget* parent)
+FramesTableView::FramesTableView(QWidget* parent)
    : QTableView(parent)
 {
    horizontalHeader()->setStretchLastSection(true);
    this->verticalHeader()->setDefaultSectionSize(10);
 }
 
-void PacketsTableView::setModel(QAbstractItemModel* model)
+void FramesTableView::setModel(QAbstractItemModel* model)
 {
    assert(dynamic_cast<FramesModel*>(model) != nullptr);
    QTableView::setModel(model);

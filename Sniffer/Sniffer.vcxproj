@@ -150,9 +150,9 @@
   <ItemGroup>
     <ClCompile Include="Src\qsn\Interpreter.cpp" />
     <ClCompile Include="Src\qsn\FramesStash.cpp" />
-    <ClCompile Include="Src\Widgets\PacketsTableView.cpp" />
     <ClCompile Include="Src\qsn\Adapter.cpp" />
     <ClCompile Include="Src\Widgets\DeviceListWidget.cpp" />
+    <ClCompile Include="Src\Widgets\FramesTableView.cpp" />
     <ClCompile Include="Src\Widgets\LogWidget.cpp" />
     <ClCompile Include="Src\qsn\FilterGenerator.cpp" />
     <ClCompile Include="Src\qsn\Structures\IPv4Interface.cpp" />
