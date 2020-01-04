@@ -148,7 +148,8 @@
     <QtUic Include="Forms\MainWindow.ui" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\qsn\Interpreter.cpp" />
+    <ClCompile Include="Src\qsn\Frame.cpp" />
+    <ClCompile Include="Src\qsn\FrameParser.cpp" />
     <ClCompile Include="Src\qsn\FramesStash.cpp" />
     <ClCompile Include="Src\qsn\Adapter.cpp" />
     <ClCompile Include="Src\Widgets\DeviceListWidget.cpp" />
@@ -179,7 +180,7 @@
     <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
     <QtMoc Include="Src\Widgets\FramesTableView.h" />
     <ClInclude Include="Src\qsn\Utils\Helper.h" />
-    <ClInclude Include="Src\qsn\Interpreter.h" />
+    <ClInclude Include="Src\qsn\FrameParser.h" />
     <ClInclude Include="Src\qsn\FramesStash.h" />
     <ClInclude Include="Src\qsn\Adapter.h" />
     <ClInclude Include="Src\qsn\Utils\Stoppable.h" />

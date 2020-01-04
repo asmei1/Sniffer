@@ -7,6 +7,7 @@
 #include "Utils/Logger.hpp"
 #include "Utils/Helper.h"
 #include "TimeFormatter.h"
+#include "FrameParser.h"
 
 FramesModel::FramesModel(QObject* parent)
 {
@@ -34,7 +35,7 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
    if(Qt::DisplayRole == role)
    {
       qsn::RawFrame* rP = getPacket(index.row());
-      qsn::IPv4Header* ipv4 = (qsn::IPv4Header*)(&rP->data[0] + 4);
+      auto frame = qsn::FrameParser::getInstance().parse(rP);
 
       switch(static_cast<HeaderIdx>(index.column()))
       {
@@ -44,19 +45,19 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
       }
       case HeaderIdx::TIME:
       {
-         return TimeFormatter::time2String(rP->time.tv_sec);
+         return TimeFormatter::time2String(frame->getRawTime().tv_sec);
       }
       case HeaderIdx::SRC_ADDR:
       {
-         return qsn::ipv42String(ipv4->saddr).c_str();
+         return qsn::ipv42String(frame->ipv4Header->saddr).c_str();
       }
       case HeaderIdx::DST_ADDR:
       {
-         return qsn::ipv42String(ipv4->daddr).c_str();
+         return qsn::ipv42String(frame->ipv4Header->daddr).c_str();
       }
       case HeaderIdx::PROTOCOL:
       {
-         return qsn::protToCStr(ipv4->proto);
+         return qsn::protToCStr(frame->ipv4Header->proto);
       }
       case HeaderIdx::LENGHT:
       {
@@ -64,16 +65,9 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
       }
       case HeaderIdx::INF:
       {
-         struct tm* ltime;
-         time_t local_tv_sec;
-         char timestr[16];
-         local_tv_sec = rP->time.tv_sec;
-         ltime = localtime(&local_tv_sec);
-         strftime(timestr, sizeof timestr, "%H:%M:%S", ltime);
-
-         auto eth = (qsn::EthernetHeader*)(&rP->data[0]);
-         
-         return qsn::mac2HexString(eth->dest).c_str();
+         return qsn::mac2HexString(frame->getMacDstAddr()).c_str()
+            + QString("  ")
+            + qsn::mac2HexString(frame->getMacSrcAddr()).c_str();
       }
       default:;
       }

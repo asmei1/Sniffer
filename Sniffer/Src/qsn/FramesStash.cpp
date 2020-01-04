@@ -4,6 +4,11 @@
 
 using namespace qsn;
 
+FramesStash::~FramesStash()
+{
+   clear();
+}
+
 void FramesStash::appendPacket(RawFrame* packet)
 {
    std::lock_guard<std::mutex> guard(mutex);

@@ -6,22 +6,6 @@
 #include "Models/FramesModel.h"
 #include <QDebug>
 
-void MainWindow::prepareStatusBarWidgets()
-{
-   this->statusBarPermanentWidget = new QWidget;
-   this->statusBarPermanentWidget->setFixedHeight(20);
-   this->openedAdapterLabel = new QLabel("None");
-   this->statusListenerLabel = new QLabel;
-   this->statusListenerLabel->setPixmap(QPixmap(":/gray_circle"));
-   this->statusListenerLabel->setToolTip("Not selected adapter to listening");
-   auto pernamentWidgetLayout = new QHBoxLayout;
-   pernamentWidgetLayout->setMargin(0);
-   pernamentWidgetLayout->setContentsMargins(0, 0, 0, 0);
-   pernamentWidgetLayout->addWidget(this->openedAdapterLabel);
-   pernamentWidgetLayout->addWidget(this->statusListenerLabel);
-   this->statusBarPermanentWidget->setLayout(pernamentWidgetLayout);
-   this->statusBar()->addPermanentWidget(this->statusBarPermanentWidget);
-}
 
 MainWindow::MainWindow(QWidget* parent)
    : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -86,6 +70,22 @@ void MainWindow::on_actionShow_device_list_triggered()
    }
 }
 
+void MainWindow::prepareStatusBarWidgets()
+{
+   this->statusBarPermanentWidget = new QWidget;
+   this->statusBarPermanentWidget->setFixedHeight(20);
+   this->openedAdapterLabel = new QLabel("None");
+   this->statusListenerLabel = new QLabel;
+   this->statusListenerLabel->setPixmap(QPixmap(":/gray_circle"));
+   this->statusListenerLabel->setToolTip("Not selected adapter to listening");
+   auto pernamentWidgetLayout = new QHBoxLayout;
+   pernamentWidgetLayout->setMargin(0);
+   pernamentWidgetLayout->setContentsMargins(0, 0, 0, 0);
+   pernamentWidgetLayout->addWidget(this->openedAdapterLabel);
+   pernamentWidgetLayout->addWidget(this->statusListenerLabel);
+   this->statusBarPermanentWidget->setLayout(pernamentWidgetLayout);
+   this->statusBar()->addPermanentWidget(this->statusBarPermanentWidget);
+}
 
 void MainWindow::on_actionStart_listening_triggered()
 {

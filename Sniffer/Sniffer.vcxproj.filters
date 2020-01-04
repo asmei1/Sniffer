@@ -105,9 +105,6 @@
     <ClCompile Include="Src\qsn\Adapter.cpp">
       <Filter>qsn</Filter>
     </ClCompile>
-    <ClCompile Include="Src\qsn\Interpreter.cpp">
-      <Filter>qsn</Filter>
-    </ClCompile>
     <ClCompile Include="TimeFormatter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -122,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="Src\Widgets\FramesTableView.cpp">
       <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\Frame.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\FrameParser.cpp">
+      <Filter>qsn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,9 +178,6 @@
     <ClInclude Include="Src\qsn\Adapter.h">
       <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\qsn\Interpreter.h">
-      <Filter>qsn</Filter>
-    </ClInclude>
     <ClInclude Include="Src\qsn\Utils\Helper.h">
       <Filter>qsn\Utils</Filter>
     </ClInclude>
@@ -204,6 +204,9 @@
     </ClInclude>
     <ClInclude Include="Src\qsn\Frame.h">
       <Filter>qsn\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\FrameParser.h">
+      <Filter>qsn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

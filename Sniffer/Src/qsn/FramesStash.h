@@ -7,7 +7,7 @@ namespace qsn
    {
    public:
       FramesStash() = default;
-      virtual ~FramesStash() = default;
+      virtual ~FramesStash();
 
       virtual void appendPacket(RawFrame* packet);
       virtual void clear();
