@@ -21,7 +21,7 @@ FrameListener::~FrameListener()
    }
 }
 
-void FrameListener::startListening(Adapter* openedAdapter)
+void FrameListener::startListening(Adapter* openedAdapter, const std::string& dumpFileName)
 {
    this->adapterToListening = openedAdapter;
 
@@ -33,10 +33,11 @@ void FrameListener::startListening(Adapter* openedAdapter)
    {
       this->listening = true;
 
-      this->listeningTask = new ListeningTask(this->adapterToListening, this->packetsStash);
+      this->adapterToListening->openDumpFile(dumpFileName);
+      this->listeningTask = new ListeningWithDumpTask(this->adapterToListening, this->packetsStash);
       this->listeningThread = new std::thread([&]()
       {
-            this->listeningTask->run();
+         this->listeningTask->run();
       });
 
       emit Logger::getInstance().log(QString("Start listening..."), LogWidget::LogLevel::INFO);
@@ -58,6 +59,7 @@ void FrameListener::stopListening()
       this->listeningTask->stop();
       this->listeningThread->join();
 
+      this->adapterToListening->closeDumpFile();
       this->adapterToListening->closeAdapter();
 
       delete this->listeningTask;
@@ -77,11 +79,11 @@ void FrameListener::ListeningTask::run()
    pcap_pkthdr* header;
    const u_char* pkt_data;
    
-   while((res = pcap_next_ex(adapter->getRawHandler(), &header, &pkt_data)) >= 0)
+   while((res = pcap_next_ex(this->adapter->getRawHandler(), &header, &pkt_data)) >= 0)
    {
       if(true == stopRequested())
       {
-         pcap_breakloop(adapter->getRawHandler());
+         pcap_breakloop(this->adapter->getRawHandler());
       }
 
       if(res == 0)
@@ -99,13 +101,13 @@ void FrameListener::ListeningWithDumpTask::run()
    int res;
    pcap_pkthdr* header;
    const u_char* pkt_data;
-   auto dumpPtr = adapter->getDumpRawPtr();
-
-   while((res = pcap_next_ex(adapter->getRawHandler(), &header, &pkt_data)) >= 0)
+   auto dumpPtr = this->adapter->getDumpRawPtr();
+   
+   while((res = pcap_next_ex(this->adapter->getRawHandler(), &header, &pkt_data)) >= 0)
    {
       if(true == stopRequested())
       {
-         pcap_breakloop(adapter->getRawHandler());
+         pcap_breakloop(this->adapter->getRawHandler());
       }
 
       if(res == 0)
@@ -115,9 +117,8 @@ void FrameListener::ListeningWithDumpTask::run()
       }
 
       this->stash->appendPacket(RawFrame::of(header, pkt_data));
-      if(nullptr != dumpPtr)
-      {
          pcap_dump((u_char*)dumpPtr, header, pkt_data);
-      }
+ 
    }
+
 }

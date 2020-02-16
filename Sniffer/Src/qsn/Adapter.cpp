@@ -98,14 +98,21 @@ void Adapter::closeAdapter()
    this->adHandler = nullptr;
 }
 
-void Adapter::openDumpFile(const std::string& fileName) 
+pcap_dumper_t* Adapter::openDumpFile(const std::string& fileName)
 {
    this->dumpFile = pcap_dump_open(this->adHandler, fileName.c_str());
+   return this->dumpFile;
 }
 
 pcap_dumper_t* Adapter::getDumpRawPtr() const
 {
    return this->dumpFile;
+}
+
+void Adapter::closeDumpFile()
+{
+   pcap_dump_flush(this->dumpFile);
+   pcap_dump_close(this->dumpFile);
 }
 
 bool Adapter::checkLinkLayer(LinkLayer linkName) const

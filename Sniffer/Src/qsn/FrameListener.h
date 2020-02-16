@@ -15,32 +15,28 @@ namespace qsn
       bool isListening() const;
 
 
-      void startListening(Adapter* openedAdapter);
+      void startListening(Adapter* openedAdapter, const std::string& dumpFileName);
       void stopListening();
    private:
       class ListeningTask : public Stoppable
       {
       public:
-         ListeningTask(const Adapter* adapterToListening, FramesStash* packetsStash)
+         ListeningTask(Adapter* adapterToListening, FramesStash* packetsStash)
             : adapter(adapterToListening), stash(packetsStash)
          {}
          virtual void run() override;
 
-      private:
-         const Adapter* adapter;
+      protected:
+         Adapter* adapter;
          FramesStash* stash;
       };
       class ListeningWithDumpTask : public ListeningTask
       {
       public:
-         ListeningWithDumpTask(const Adapter* adapterToListening, FramesStash* packetsStash)
+         ListeningWithDumpTask(Adapter* adapterToListening, FramesStash* packetsStash)
             : ListeningTask(adapterToListening, packetsStash)
          {}
          void run() override;
-
-      private:
-         const Adapter* adapter;
-         FramesStash* stash;
       };
 
       bool listening = false;

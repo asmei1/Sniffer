@@ -46,7 +46,7 @@ namespace qsn
        * \brief Create dump file.Execute this function after open adapter;
        * \param fileName Path with file name to create and open for dumping.
        */
-      void openDumpFile(const std::string& fileName);
+      pcap_dumper_t* openDumpFile(const std::string& fileName);
       pcap_dumper_t* getDumpRawPtr() const;
       void closeDumpFile();
 

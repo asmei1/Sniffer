@@ -41,7 +41,8 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
       {
       case HeaderIdx::LP:
       {
-         return index.row();
+         //+ 1 to skip 0 
+         return index.row() + 1;
       }
       case HeaderIdx::TIME:
       {

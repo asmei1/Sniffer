@@ -93,14 +93,49 @@ void MainWindow::prepareStatusBarWidgets()
    this->setAppStatus(AppStatus::Init);
 }
 
+bool MainWindow::prepareTempDumpFile()
+{
+   if(true == this->dumpTempFile.isOpen())
+   {
+      auto res = QMessageBox::information(this, "New capturing...", "Do you want to save captured packets? \nThey will be removed, if you don't save them.",
+                                          QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+      if(QMessageBox::Save == res)
+      {
+         const QString path = QFileDialog::getSaveFileName(this);
+         if(true == path.isEmpty())
+         {
+            return false;
+         }
+         
+         if(true == this->dumpTempFile.copy(path))
+         {
+            emit Logger::getInstance().log(QString("Packets saved in %1 file!").arg(path));
+            return false;
+         }
+         emit Logger::getInstance().log(QString("%1 file is inaccessible!").arg(path), LogWidget::LogLevel::ERR);
+      }
+      else if(QMessageBox::Cancel == res)
+      {
+         return false;
+      }
+
+      this->dumpTempFile.close();
+   }
+   this->dumpTempFile.open();
+   return true;
+}
+
 void MainWindow::on_actionStart_listening_triggered()
 {
-   openSelectedAdapter(this->selectedAdapterName.toStdString());
-   on_actionClear_all_packets_triggered();
+   if (true == prepareTempDumpFile())
+   {
+      openSelectedAdapter(this->selectedAdapterName.toStdString());
+      on_actionClear_all_packets_triggered();
 
-   this->packetListener->startListening(this->networkAdapter.getOpenedAdapter());
+      this->packetListener->startListening(this->networkAdapter.getOpenedAdapter(), dumpTempFile.fileName().toStdString());
 
-   this->setAppStatus(AppStatus::Listening);
+      this->setAppStatus(AppStatus::Listening);
+   }
 }
 
 

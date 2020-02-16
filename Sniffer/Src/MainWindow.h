@@ -14,7 +14,8 @@ class MainWindow : public QMainWindow
  
 public:
    void prepareStatusBarWidgets();
-   MainWindow(QWidget* parent = Q_NULLPTR);
+   bool prepareTempDumpFile();
+   MainWindow(QWidget* parent = nullptr);
    ~MainWindow();
 
 
@@ -49,7 +50,7 @@ private:
    QLabel* statusListenerLabel = nullptr;
    QLabel* openedAdapterLabel = nullptr;
 
-
+   QTemporaryFile dumpTempFile;
    QString selectedAdapterName;
    qsn::FrameListener* packetListener = nullptr;
    qsn::AdapterManager networkAdapter;
