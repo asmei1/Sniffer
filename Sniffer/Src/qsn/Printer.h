@@ -27,15 +27,16 @@ namespace qsn
       std::stringstream ss;
       for(size_t i = 0; i < size; i++)
       {
+         if(i > 0 && i % nextLineCharsCount == 0)
+         {
+            ss << "\n";
+         }
+
          ss << std::uppercase << std::hex << std::setfill('0') << std::setw(2) << static_cast<int>(data[i]);
          
          if(i + 1 < size)
          {
             ss << delimiter;
-         }
-         if(i > 0 && i % nextLineCharsCount == 0)
-         {
-            ss << "\n";
          }
       }
 
@@ -47,6 +48,11 @@ namespace qsn
       std::stringstream ss;
       for(size_t i = 0; i < size; i++)
       {
+         if(i > 0 && i % nextLineCharsCount == 0)
+         {
+            ss << '\n';
+         }
+
          if(true == replaceNotPrintableCharacters && false == isprint(data[i]))
          {
             ss << '.';
@@ -54,11 +60,6 @@ namespace qsn
          else
          {
             ss << data[i];
-         }
-         
-         if(i > 0 && i % nextLineCharsCount == 0)
-         {
-            ss << '\n';
          }
       }
 
@@ -87,6 +88,10 @@ namespace qsn
          return "IPv4";
       case IPPROTO_IPV6:
          return "IPv6";
+      case IPPROTO_ICMPV6:
+         return "ICMPv6";
+      case IPPROTO_SCTP:
+         return "SCTP";
       case IPPROTO_UDP:
          return "UDP";
       default:

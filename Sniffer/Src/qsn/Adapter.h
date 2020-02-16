@@ -21,15 +21,42 @@ namespace qsn
       std::string getFullDescription() const;
       pcap_t* getRawHandler() const;
 
+
+      /**
+       * \brief Check and return, if this adapter is a loopback
+       * \return 
+       */
       bool isLoopBack() const;
 
+
+      /**
+       * \brief Check and return, if this adapter is a given link layer
+       * \param linkName Link layer to check.
+       * \return 
+       */
       bool checkLinkLayer(LinkLayer linkName) const;
 
-      friend std::ostream& operator<<(std::ostream& stream, Adapter& dev);
+
       void openAdapter();
+      void closeAdapter();
+
+
+      //-------------------DUMP FILES-------------------
+      
+      /**
+       * \brief Create dump file.Execute this function after open adapter;
+       * \param fileName Path with file name to create and open for dumping.
+       */
+      void openDumpFile(const std::string& fileName);
+      pcap_dumper_t* getDumpRawPtr() const;
+      void closeDumpFile();
+
+
+
+      friend std::ostream& operator<<(std::ostream& stream, Adapter& dev);
    private:
       pcap_t* adHandler = nullptr;
-
+      pcap_dumper_t* dumpFile = nullptr;
 
       std::string name;
       std::string description;

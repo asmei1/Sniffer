@@ -6,5 +6,8 @@ namespace qsn
    {
       MacAddr dest;
       MacAddr source;
+      uint16_t ethernetType;
    };
+
+
 }

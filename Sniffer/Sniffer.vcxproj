@@ -152,6 +152,7 @@
     <ClCompile Include="Src\qsn\FrameParser.cpp" />
     <ClCompile Include="Src\qsn\FramesStash.cpp" />
     <ClCompile Include="Src\qsn\Adapter.cpp" />
+    <ClCompile Include="Src\qsn\Packet.cpp" />
     <ClCompile Include="Src\Widgets\DeviceListWidget.cpp" />
     <ClCompile Include="Src\Widgets\FramesTableView.cpp" />
     <ClCompile Include="Src\Widgets\LogWidget.cpp" />
@@ -166,7 +167,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TimeFormatter.cpp" />
+    <ClCompile Include="Src\TimeFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Src\MainWindow.h" />
@@ -175,7 +176,7 @@
     <ClInclude Include="Src\qsn\Frame.h" />
     <ClInclude Include="Src\qsn\Packet.h" />
     <ClInclude Include="Src\qsn\Segment.h" />
-    <ClInclude Include="TimeFormatter.h" />
+    <ClInclude Include="Src\TimeFormatter.h" />
     <QtMoc Include="Src\Widgets\LogWidget.hpp" />
     <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
     <QtMoc Include="Src\Widgets\FramesTableView.h" />

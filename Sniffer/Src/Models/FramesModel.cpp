@@ -49,15 +49,33 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
       }
       case HeaderIdx::SRC_ADDR:
       {
-         return qsn::ipv42String(frame->ipv4Header->saddr).c_str();
+         const auto& packet = frame->getPacket();
+         if(true == frame->isValid() && true == packet.has_value())
+         {
+            auto srcAddr = packet->getSrcAddr();
+            if(true == srcAddr.has_value())
+            {
+               return qsn::ipv42String(*srcAddr).c_str();
+            }
+         }
+         break;
       }
       case HeaderIdx::DST_ADDR:
       {
-         return qsn::ipv42String(frame->ipv4Header->daddr).c_str();
+         const auto& packet = frame->getPacket();
+         if(true == frame->isValid() && true == packet.has_value())
+         {
+            const auto& dstAddr = packet->getDstAddr();
+            if(true == dstAddr.has_value())
+            {
+               return qsn::ipv42String(*dstAddr).c_str();
+            }
+         }
+         break;
       }
       case HeaderIdx::PROTOCOL:
       {
-         return qsn::protToCStr(frame->ipv4Header->proto);
+         return qsn::protToCStr(frame->getPacket()->getProtocalNumber());
       }
       case HeaderIdx::LENGHT:
       {
@@ -65,23 +83,32 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
       }
       case HeaderIdx::INF:
       {
-         return qsn::mac2HexString(frame->getMacDstAddr()).c_str()
-            + QString("  ")
-            + qsn::mac2HexString(frame->getMacSrcAddr()).c_str();
+         auto dstMac = frame->getMacDstAddr();
+         auto srcMac = frame->getMacSrcAddr();
+         if(dstMac && srcMac)
+         {
+            return qsn::mac2HexString(*dstMac).c_str()
+               + QString("  ")
+               + qsn::mac2HexString(*srcMac).c_str();
+         }
+         else
+         {
+            return "Loopback";
+         }
       }
       default:;
       }
-      
+
    }
    else if(Qt::TextAlignmentRole == role)
    {
       if(qsn::ec2Int(HeaderIdx::INF) != index.column())
       {
-         return Qt::AlignRight;
+         return int(Qt::AlignRight | Qt::AlignVCenter);
       }
       else
       {
-         return Qt::AlignLeft;
+         return int(Qt::AlignLeft | Qt::AlignVCenter);;
       }
    }
    else if(Qt::UserRole <= role)

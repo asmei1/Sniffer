@@ -11,7 +11,7 @@ namespace qsn
       void loadAllDevices();
 
       const std::vector<Adapter>& getAllAdapters() const;
-      const Adapter* getOpenedAdapter() const;
+      Adapter* getOpenedAdapter() const;
 
       void openAdapter(const std::string& adapterName);
       void closeAdapter(const std::string& adapterName);

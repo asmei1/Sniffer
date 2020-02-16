@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget* parent)
 
    //on_actionShow_device_list_triggered();
 
+   connect(this->ui->tableView_packets->selectionModel(), &QItemSelectionModel::currentChanged, this, &MainWindow::tableViewSelectionChanged);
 }
 
 MainWindow::~MainWindow()
@@ -66,7 +67,9 @@ void MainWindow::on_actionShow_device_list_triggered()
    {
       emit Logger::getInstance().log(QString("Selected device: %1").arg(dLWidg.getNameOfSelectedAdapter()), LogWidget::LogLevel::INFO);
 
-      openSelectedAdapter(dLWidg.getNameOfSelectedAdapter().toStdString());
+      this->selectedAdapterName = dLWidg.getNameOfSelectedAdapter();
+
+      this->ui->actionStart_listening->setEnabled(true);
    }
 }
 
@@ -76,8 +79,6 @@ void MainWindow::prepareStatusBarWidgets()
    this->statusBarPermanentWidget->setFixedHeight(20);
    this->openedAdapterLabel = new QLabel("None");
    this->statusListenerLabel = new QLabel;
-   this->statusListenerLabel->setPixmap(QPixmap(":/gray_circle"));
-   this->statusListenerLabel->setToolTip("Not selected adapter to listening");
    auto pernamentWidgetLayout = new QHBoxLayout;
    pernamentWidgetLayout->setMargin(0);
    pernamentWidgetLayout->setContentsMargins(0, 0, 0, 0);
@@ -85,23 +86,25 @@ void MainWindow::prepareStatusBarWidgets()
    pernamentWidgetLayout->addWidget(this->statusListenerLabel);
    this->statusBarPermanentWidget->setLayout(pernamentWidgetLayout);
    this->statusBar()->addPermanentWidget(this->statusBarPermanentWidget);
+
+   this->setAppStatus(AppStatus::Init);
 }
 
 void MainWindow::on_actionStart_listening_triggered()
 {
-   this->packetListener->initListener(this->networkAdapter.getOpenedAdapter());
+   openSelectedAdapter(this->selectedAdapterName.toStdString());
    on_actionClear_all_packets_triggered();
-   this->packetListener->startListening();
-   this->statusListenerLabel->setPixmap(QPixmap(":/green_circle"));
-   this->statusListenerLabel->setToolTip("Listening");
+
+   this->packetListener->startListening(this->networkAdapter.getOpenedAdapter());
+
+   this->setAppStatus(AppStatus::Listening);
 }
 
 
 void MainWindow::on_actionStop_listening_triggered()
 {
+   this->setAppStatus(AppStatus::Stopped);
    this->packetListener->stopListening();
-   this->statusListenerLabel->setPixmap(QPixmap(":/red_circle"));
-   this->statusListenerLabel->setToolTip("Stopped");
 }
 
 void MainWindow::openSelectedAdapter(const std::string& adapterName)
@@ -116,10 +119,6 @@ void MainWindow::openSelectedAdapter(const std::string& adapterName)
       //set label
       this->openedAdapterLabel->setToolTip(adapter->getFullDescription().c_str());
       this->openedAdapterLabel->setText(adapter->getName().c_str());
-
-      //enable actions
-      this->ui->actionStart_listening->setEnabled(true);
-      this->ui->actionStop_listening->setEnabled(true);
 
       emit Logger::getInstance().log(QString("Adapter %1 opened successfully.").arg(adapter->getName().c_str()), LogWidget::LogLevel::INFO);
    }
@@ -146,7 +145,7 @@ void MainWindow::on_actionLog_window_triggered()
    }
 }
 
-void MainWindow::on_tableView_packets_clicked(const QModelIndex &index)
+void MainWindow::tableViewSelectionChanged(const QModelIndex& index)
 {
    if(true == index.isValid())
    {
@@ -168,4 +167,44 @@ void MainWindow::on_actionClear_all_packets_triggered()
 
    this->ui->plainTextEdit_asciiContent->clear();
    this->ui->plainTextEdit_hexContent->clear();
+}
+
+void MainWindow::setAppStatus(const AppStatus& appStatus)
+{
+   QString urlToPixmap;
+   QString toolTip;
+   bool startActFlag;
+   bool stopActFlag;
+   switch(appStatus)
+   {
+      case AppStatus::Init:
+      {
+         urlToPixmap = ":/gray_circle";
+         toolTip = "Not selected adapter to listening";
+         startActFlag = false;
+         stopActFlag = false;
+         break;
+      }
+      case AppStatus::Listening:
+      {
+         urlToPixmap = ":/green_circle";
+         toolTip = "Listening";
+         startActFlag = false;
+         stopActFlag = true;
+         break;
+      }
+      case AppStatus::Stopped:
+      {
+         urlToPixmap = ":/red_circle";
+         toolTip = "Stopped";
+         startActFlag = true;
+         stopActFlag = false;
+         break;
+      }
+      default:;
+   }
+   this->statusListenerLabel->setPixmap(QPixmap(urlToPixmap));
+   this->statusListenerLabel->setToolTip(toolTip);
+   this->ui->actionStart_listening->setEnabled(startActFlag);
+   this->ui->actionStop_listening->setEnabled(stopActFlag);
 }

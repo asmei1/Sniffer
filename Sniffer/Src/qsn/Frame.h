@@ -1,10 +1,11 @@
 #pragma once
 #include "Structures/RawFrame.h"
 #include "Structures/EthernetHeader.h"
+#include "Structures/IPv4Header.h"
+#include "Packet.h"
 
 namespace qsn
 {
-   struct IPv4Header;
 
    class Frame
    {
@@ -17,18 +18,25 @@ namespace qsn
       timeval getRawTime() const;
       int getCapturedBytesCount() const;
 
-      MacAddr getMacSrcAddr() const;
-      MacAddr getMacDstAddr() const;
+      std::optional<MacAddr> getMacSrcAddr() const;
+      std::optional<MacAddr> getMacDstAddr() const;
 
+      std::optional<Packet> getPacket() const;
+
+      bool isValid() const;
 
       Frame(const Frame&) = delete;
       Frame& operator= (const Frame&) = delete;
 
 
-      IPv4Header* ipv4Header;
    private:
       const RawFrame* rawFrame = nullptr;
-      EthernetHeader* eth;
+
+      std::optional<EthernetHeader> eth;
+      std::optional<Packet> packet;
+
+
+      bool valid = true;
    };
 
    using FrameUPtr = std::unique_ptr<Frame>;

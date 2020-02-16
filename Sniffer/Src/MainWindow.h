@@ -28,21 +28,29 @@ private slots:
 
    void on_actionLog_window_triggered();
 
-   void on_tableView_packets_clicked(const QModelIndex &index);
+   void tableViewSelectionChanged(const QModelIndex &index);
 
    void on_actionClear_all_packets_triggered();
 
 private:
+   enum class AppStatus
+   {
+      Init,
+      Listening,
+      Stopped,
+   };
+
+   void setAppStatus(const AppStatus& appStatus)
    void openSelectedAdapter(const std::string& adapterName);
 
    Ui::MainWindow* ui;
-
+   
    QWidget* statusBarPermanentWidget = nullptr;
    QLabel* statusListenerLabel = nullptr;
    QLabel* openedAdapterLabel = nullptr;
 
 
-
+   QString selectedAdapterName;
    qsn::FrameListener* packetListener = nullptr;
    qsn::AdapterManager networkAdapter;
    FramesModel* packetsModel = nullptr;

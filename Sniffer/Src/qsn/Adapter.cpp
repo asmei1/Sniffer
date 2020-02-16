@@ -90,7 +90,22 @@ void Adapter::openAdapter()
    {
       throw (errorBuff);
    }
-      
+}
+
+void Adapter::closeAdapter()
+{
+   pcap_close(this->adHandler);
+   this->adHandler = nullptr;
+}
+
+void Adapter::openDumpFile(const std::string& fileName) 
+{
+   this->dumpFile = pcap_dump_open(this->adHandler, fileName.c_str());
+}
+
+pcap_dumper_t* Adapter::getDumpRawPtr() const
+{
+   return this->dumpFile;
 }
 
 bool Adapter::checkLinkLayer(LinkLayer linkName) const

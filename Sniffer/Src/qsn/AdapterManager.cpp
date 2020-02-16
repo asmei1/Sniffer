@@ -41,7 +41,7 @@ const std::vector<Adapter>& AdapterManager::getAllAdapters() const
    return this->allAdapters;
 }
 
-const Adapter* AdapterManager::getOpenedAdapter() const
+Adapter* AdapterManager::getOpenedAdapter() const
 {
    return this->openedAdapter;
 }

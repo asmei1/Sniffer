@@ -57,7 +57,7 @@
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
          <number>0</number>
@@ -294,12 +294,12 @@ border-color: black black black transparent;
   <customwidget>
    <class>LogWidget</class>
    <extends>QPlainTextEdit</extends>
-   <header>Src/Widgets/LogWidget.hpp</header>
+   <header>Widgets/LogWidget.hpp</header>
   </customwidget>
   <customwidget>
    <class>FramesTableView</class>
    <extends>QTableView</extends>
-   <header>Src/Widgets/FramesTableView.h</header>
+   <header>Widgets/FramesTableView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

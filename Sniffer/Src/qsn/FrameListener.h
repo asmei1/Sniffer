@@ -12,11 +12,10 @@ namespace qsn
       FrameListener(FramesStash* packetsStash);
       ~FrameListener();
 
-      void initListener(const Adapter* openedAdapter);
       bool isListening() const;
 
 
-      void startListening();
+      void startListening(Adapter* openedAdapter);
       void stopListening();
    private:
       class ListeningTask : public Stoppable
@@ -24,6 +23,18 @@ namespace qsn
       public:
          ListeningTask(const Adapter* adapterToListening, FramesStash* packetsStash)
             : adapter(adapterToListening), stash(packetsStash)
+         {}
+         virtual void run() override;
+
+      private:
+         const Adapter* adapter;
+         FramesStash* stash;
+      };
+      class ListeningWithDumpTask : public ListeningTask
+      {
+      public:
+         ListeningWithDumpTask(const Adapter* adapterToListening, FramesStash* packetsStash)
+            : ListeningTask(adapterToListening, packetsStash)
          {}
          void run() override;
 
@@ -33,7 +44,7 @@ namespace qsn
       };
 
       bool listening = false;
-      const Adapter* adapterToListening = nullptr;
+      Adapter* adapterToListening = nullptr;
       FramesStash* packetsStash = nullptr;
 
       std::thread* listeningThread = nullptr;
