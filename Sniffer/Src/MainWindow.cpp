@@ -227,6 +227,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
    bool startActFlag;
    bool stopActFlag;
    bool saveActFlag;
+   bool loadActFlag;
    switch(appStatus)
    {
       case AppStatus::Init:
@@ -236,6 +237,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          startActFlag = false;
          saveActFlag = false;
          stopActFlag = false;
+         loadActFlag = true;
          break;
       }
       case AppStatus::Listening:
@@ -245,6 +247,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          startActFlag = false;
          stopActFlag = true;
          saveActFlag = false;
+         loadActFlag = false;
          break;
       }
       case AppStatus::Stopped:
@@ -254,6 +257,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          startActFlag = true;
          saveActFlag = true;
          stopActFlag = false;
+         loadActFlag = true;
          break;
       }
       default:;
@@ -263,9 +267,23 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
    this->ui->actionStart_listening->setEnabled(startActFlag);
    this->ui->actionStop_listening->setEnabled(stopActFlag);
    this->ui->actionSave_dump_file->setEnabled(saveActFlag);
+   this->ui->actionLoad_dump_file->setEnabled(loadActFlag);
 }
 
 void MainWindow::on_actionSave_dump_file_triggered()
 {
    saveDumpFile();
+}
+
+void MainWindow::on_actionLoad_dump_file_triggered()
+{
+   const QString path = QFileDialog::getOpenFileName(this);
+   if(false == path.isEmpty())
+   {
+      //clear model
+      on_actionClear_all_packets_triggered();
+
+      //load data from file
+      this->packetListener->loadDumpFile(path.toStdString());
+   }
 }

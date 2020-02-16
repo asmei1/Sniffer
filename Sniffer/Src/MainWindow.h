@@ -36,6 +36,8 @@ private slots:
 
    void on_actionSave_dump_file_triggered();
 
+   void on_actionLoad_dump_file_triggered();
+
 private:
    enum class AppStatus
    {

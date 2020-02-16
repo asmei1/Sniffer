@@ -155,6 +155,7 @@ border-color: black black black transparent;
     <addaction name="actionStart_listening"/>
     <addaction name="actionStop_listening"/>
     <addaction name="separator"/>
+    <addaction name="actionLoad_dump_file"/>
     <addaction name="actionSave_dump_file"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
@@ -294,6 +295,11 @@ border-color: black black black transparent;
   <action name="actionSave_dump_file">
    <property name="text">
     <string>Save dump file</string>
+   </property>
+  </action>
+  <action name="actionLoad_dump_file">
+   <property name="text">
+    <string>Load dump file</string>
    </property>
   </action>
  </widget>
