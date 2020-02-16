@@ -77,13 +77,16 @@ void MainWindow::prepareStatusBarWidgets()
 {
    this->statusBarPermanentWidget = new QWidget;
    this->statusBarPermanentWidget->setFixedHeight(20);
+
    this->openedAdapterLabel = new QLabel("None");
    this->statusListenerLabel = new QLabel;
+
    auto pernamentWidgetLayout = new QHBoxLayout;
    pernamentWidgetLayout->setMargin(0);
    pernamentWidgetLayout->setContentsMargins(0, 0, 0, 0);
    pernamentWidgetLayout->addWidget(this->openedAdapterLabel);
    pernamentWidgetLayout->addWidget(this->statusListenerLabel);
+
    this->statusBarPermanentWidget->setLayout(pernamentWidgetLayout);
    this->statusBar()->addPermanentWidget(this->statusBarPermanentWidget);
 
@@ -180,7 +183,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
       case AppStatus::Init:
       {
          urlToPixmap = ":/gray_circle";
-         toolTip = "Not selected adapter to listening";
+         toolTip = tr("Not selected adapter to listening");
          startActFlag = false;
          stopActFlag = false;
          break;
@@ -188,7 +191,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
       case AppStatus::Listening:
       {
          urlToPixmap = ":/green_circle";
-         toolTip = "Listening";
+         toolTip = tr("Listening");
          startActFlag = false;
          stopActFlag = true;
          break;
@@ -196,7 +199,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
       case AppStatus::Stopped:
       {
          urlToPixmap = ":/red_circle";
-         toolTip = "Stopped";
+         toolTip = tr("Stopped");
          startActFlag = true;
          stopActFlag = false;
          break;

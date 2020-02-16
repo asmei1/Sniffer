@@ -21,15 +21,10 @@ FrameListener::~FrameListener()
    }
 }
 
-
-void FrameListener::initListener(Adapter* openedAdapter)
+void FrameListener::startListening(Adapter* openedAdapter)
 {
    this->adapterToListening = openedAdapter;
-}
 
-void FrameListener::startListening()
-{
-   assert(nullptr != this->adapterToListening && "Adapter cannot be null!");
    if(true == this->listening)
    {
       emit Logger::getInstance().log("Listener is already running!", LogWidget::LogLevel::DEBUG_LOG);
@@ -99,7 +94,7 @@ void FrameListener::ListeningTask::run()
    }
 }
 
-void FrameListener::ListeningTaskWithDump::run()
+void FrameListener::ListeningWithDumpTask::run()
 {
    int res;
    pcap_pkthdr* header;

@@ -42,7 +42,6 @@ namespace qsn
 
 
       //-------------------DUMP FILES-------------------
-      
       /**
        * \brief Create dump file.Execute this function after open adapter;
        * \param fileName Path with file name to create and open for dumping.

@@ -40,7 +40,7 @@ private:
       Stopped,
    };
 
-   void setAppStatus(const AppStatus& appStatus)
+   void setAppStatus(const AppStatus& appStatus);
    void openSelectedAdapter(const std::string& adapterName);
 
    Ui::MainWindow* ui;
