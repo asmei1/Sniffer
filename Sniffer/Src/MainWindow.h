@@ -14,6 +14,7 @@ class MainWindow : public QMainWindow
  
 public:
    void prepareStatusBarWidgets();
+   bool saveDumpFile();
    bool prepareTempDumpFile();
    MainWindow(QWidget* parent = nullptr);
    ~MainWindow();
@@ -32,6 +33,8 @@ private slots:
    void tableViewSelectionChanged(const QModelIndex &index);
 
    void on_actionClear_all_packets_triggered();
+
+   void on_actionSave_dump_file_triggered();
 
 private:
    enum class AppStatus

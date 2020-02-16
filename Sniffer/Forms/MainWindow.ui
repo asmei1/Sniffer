@@ -155,6 +155,8 @@ border-color: black black black transparent;
     <addaction name="actionStart_listening"/>
     <addaction name="actionStop_listening"/>
     <addaction name="separator"/>
+    <addaction name="actionSave_dump_file"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -287,6 +289,11 @@ border-color: black black black transparent;
   <action name="actionClear_all_packets">
    <property name="text">
     <string>Clear all packets</string>
+   </property>
+  </action>
+  <action name="actionSave_dump_file">
+   <property name="text">
+    <string>Save dump file</string>
    </property>
   </action>
  </widget>

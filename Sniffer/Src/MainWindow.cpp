@@ -93,41 +93,54 @@ void MainWindow::prepareStatusBarWidgets()
    this->setAppStatus(AppStatus::Init);
 }
 
+bool MainWindow::saveDumpFile()
+{
+   bool rV = false;
+   const QString path = QFileDialog::getSaveFileName(this);
+   if(false == path.isEmpty())
+   {
+      if(true == this->dumpTempFile.copy(path))
+      {
+         emit Logger::getInstance().log(QString("Packets saved in %1 file!").arg(path));
+         rV = true;
+      }
+      else
+      {
+         emit Logger::getInstance().log(QString("%1 file is inaccessible!").arg(path), LogWidget::LogLevel::ERR);
+      }
+   }
+
+   return rV;
+}
+
 bool MainWindow::prepareTempDumpFile()
 {
+   bool rV = true;
    if(true == this->dumpTempFile.isOpen())
    {
       auto res = QMessageBox::information(this, "New capturing...", "Do you want to save captured packets? \nThey will be removed, if you don't save them.",
-                                          QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+         QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
       if(QMessageBox::Save == res)
       {
-         const QString path = QFileDialog::getSaveFileName(this);
-         if(true == path.isEmpty())
-         {
-            return false;
-         }
-         
-         if(true == this->dumpTempFile.copy(path))
-         {
-            emit Logger::getInstance().log(QString("Packets saved in %1 file!").arg(path));
-            return false;
-         }
-         emit Logger::getInstance().log(QString("%1 file is inaccessible!").arg(path), LogWidget::LogLevel::ERR);
+         rV = saveDumpFile();
       }
       else if(QMessageBox::Cancel == res)
       {
-         return false;
+         rV = false;
       }
 
       this->dumpTempFile.close();
    }
-   this->dumpTempFile.open();
-   return true;
+   if(true == rV)
+   {
+      this->dumpTempFile.open();
+   }
+   return rV;
 }
 
 void MainWindow::on_actionStart_listening_triggered()
 {
-   if (true == prepareTempDumpFile())
+   if(true == prepareTempDumpFile())
    {
       openSelectedAdapter(this->selectedAdapterName.toStdString());
       on_actionClear_all_packets_triggered();
@@ -213,6 +226,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
    QString toolTip;
    bool startActFlag;
    bool stopActFlag;
+   bool saveActFlag;
    switch(appStatus)
    {
       case AppStatus::Init:
@@ -220,6 +234,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          urlToPixmap = ":/gray_circle";
          toolTip = tr("Not selected adapter to listening");
          startActFlag = false;
+         saveActFlag = false;
          stopActFlag = false;
          break;
       }
@@ -229,6 +244,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          toolTip = tr("Listening");
          startActFlag = false;
          stopActFlag = true;
+         saveActFlag = false;
          break;
       }
       case AppStatus::Stopped:
@@ -236,6 +252,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          urlToPixmap = ":/red_circle";
          toolTip = tr("Stopped");
          startActFlag = true;
+         saveActFlag = true;
          stopActFlag = false;
          break;
       }
@@ -245,4 +262,10 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
    this->statusListenerLabel->setToolTip(toolTip);
    this->ui->actionStart_listening->setEnabled(startActFlag);
    this->ui->actionStop_listening->setEnabled(stopActFlag);
+   this->ui->actionSave_dump_file->setEnabled(saveActFlag);
+}
+
+void MainWindow::on_actionSave_dump_file_triggered()
+{
+   saveDumpFile();
 }
