@@ -42,6 +42,8 @@ private:
       DST_ADDR,
       PROTOCOL,
       LENGHT,
+      SRC_MAC,
+      DST_MAC,
       INF,
    };
    const std::map<HeaderIdx, QString> headers =
@@ -52,6 +54,8 @@ private:
       {HeaderIdx::DST_ADDR ,"Destination address"},
       {HeaderIdx::PROTOCOL ,"Protocol"},
       {HeaderIdx::LENGHT ,"Len"},
+      {HeaderIdx::SRC_MAC ,"Src mac"},
+      {HeaderIdx::DST_MAC ,"Dst mac"},
       {HeaderIdx::INF ,"Information"}
    };
 };

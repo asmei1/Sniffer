@@ -39,65 +39,73 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
 
       switch(static_cast<HeaderIdx>(index.column()))
       {
-      case HeaderIdx::LP:
-      {
-         //+ 1 to skip 0 
-         return index.row() + 1;
-      }
-      case HeaderIdx::TIME:
-      {
-         return TimeFormatter::time2String(frame->getRawTime().tv_sec);
-      }
-      case HeaderIdx::SRC_ADDR:
-      {
-         const auto& packet = frame->getPacket();
-         if(true == frame->isValid() && true == packet.has_value())
+         case HeaderIdx::LP:
          {
-            auto srcAddr = packet->getSrcAddr();
-            if(true == srcAddr.has_value())
+            //+ 1 to skip 0 
+            return index.row() + 1;
+         }
+         case HeaderIdx::TIME:
+         {
+            return TimeFormatter::time2String(frame->getRawTime().tv_sec);
+         }
+         case HeaderIdx::SRC_ADDR:
+         {
+            const auto& packet = frame->getPacket();
+            if(true == frame->isValid() && true == packet.has_value())
             {
-               return qsn::ipv42String(*srcAddr).c_str();
+               auto srcAddr = packet->getSrcAddr();
+               if(true == srcAddr.has_value())
+               {
+                  return qsn::ipv42String(*srcAddr).c_str();
+               }
+            }
+            break;
+         }
+         case HeaderIdx::DST_ADDR:
+         {
+            const auto& packet = frame->getPacket();
+            if(true == frame->isValid() && true == packet.has_value())
+            {
+               const auto& dstAddr = packet->getDstAddr();
+               if(true == dstAddr.has_value())
+               {
+                  return qsn::ipv42String(*dstAddr).c_str();
+               }
+            }
+            break;
+         }
+         case HeaderIdx::PROTOCOL:
+         {
+            return qsn::protToCStr(frame->getPacket()->getProtocalNumber());
+         }
+         case HeaderIdx::LENGHT:
+         {
+            return QString::number(rP->caplen);
+         }
+         case HeaderIdx::SRC_MAC:
+         {
+            auto srcMac = frame->getMacSrcAddr();
+            return qsn::mac2HexString(*srcMac).c_str();
+         }
+         case HeaderIdx::DST_MAC:
+         {
+            auto dstMac = frame->getMacDstAddr();
+            return qsn::mac2HexString(*dstMac).c_str();
+         }
+         case HeaderIdx::INF:
+         {
+            auto dstMac = frame->getMacDstAddr();
+            auto srcMac = frame->getMacSrcAddr();
+            if(dstMac && srcMac)
+            {
+               return "";
+            }
+            else
+            {
+               return "Loopback";
             }
          }
-         break;
-      }
-      case HeaderIdx::DST_ADDR:
-      {
-         const auto& packet = frame->getPacket();
-         if(true == frame->isValid() && true == packet.has_value())
-         {
-            const auto& dstAddr = packet->getDstAddr();
-            if(true == dstAddr.has_value())
-            {
-               return qsn::ipv42String(*dstAddr).c_str();
-            }
-         }
-         break;
-      }
-      case HeaderIdx::PROTOCOL:
-      {
-         return qsn::protToCStr(frame->getPacket()->getProtocalNumber());
-      }
-      case HeaderIdx::LENGHT:
-      {
-         return QString::number(rP->caplen);
-      }
-      case HeaderIdx::INF:
-      {
-         auto dstMac = frame->getMacDstAddr();
-         auto srcMac = frame->getMacSrcAddr();
-         if(dstMac && srcMac)
-         {
-            return qsn::mac2HexString(*dstMac).c_str()
-               + QString("  ")
-               + qsn::mac2HexString(*srcMac).c_str();
-         }
-         else
-         {
-            return "Loopback";
-         }
-      }
-      default:;
+         default:;
       }
 
    }
