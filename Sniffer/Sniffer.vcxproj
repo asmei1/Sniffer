@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{B12702AD-ABFB-343A-A199-8E24837244A3}</ProjectGuid>
+    <ProjectGuid>{4BE6250A-547A-3042-A777-D2C348FAFF8F}</ProjectGuid>
     <Keyword>QtVS_v301</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -23,6 +23,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
@@ -52,12 +54,12 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>charts;core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>msvc5_12_6__2017_64_</QtInstall>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>charts;core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets</QtModules>
+    <QtInstall>msvc5_12_6__2017_64_</QtInstall>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -78,16 +80,17 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
-      <AdditionalIncludeDirectories>C:\Programowanie\Cpp\Sniffer\Libs\npcap\Include;.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\npcap\Include;$(ProjectDir)GeneratedFiles\$(ConfigurationName);$(ProjectDir)GeneratedFiles;$(ProjectDir)Src;$(ProjectDir)Src\qsn;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\npcap\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;Packet.lib;wpcap.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>wpcap.dll</DelayLoadDLLs>
     </Link>
     <QtUic>
       <QtUicFileName>ui_%(Filename).h</QtUicFileName>
@@ -96,10 +99,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtMoc>
       <PrependInclude>stdafx.h</PrependInclude>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </QtMoc>
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <DebugInformationFormat />
+      <DebugInformationFormat>None</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -108,9 +112,13 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
-      <AdditionalIncludeDirectories>C:\Programowanie\Cpp\Sniffer\Libs\npcap\Include;.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Programowanie\Cpp\Sniffer\Libs\npcap\Include;$(ProjectDir)GeneratedFiles\$(ConfigurationName);$(ProjectDir)GeneratedFiles;$(ProjectDir)Src;$(ProjectDir)Src\qsn;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <CompileAsManaged>false</CompileAsManaged>
+      <CompileAsWinRT>false</CompileAsWinRT>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -118,9 +126,15 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\npcap\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>ws2_32.lib;Packet.lib;wpcap.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <NoEntryPoint>false</NoEntryPoint>
+      <LinkStatus>false</LinkStatus>
+      <DelayLoadDLLs>wpcap.dll</DelayLoadDLLs>
     </Link>
     <QtUic>
       <QtUicFileName>ui_%(Filename).h</QtUicFileName>
+      <DisplayDependencies>false</DisplayDependencies>
     </QtUic>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -130,38 +144,60 @@
     <ResourceCompile Include="Sniffer.rc" />
   </ItemGroup>
   <ItemGroup>
+    <QtUic Include="Forms\DeviceListWidget.ui" />
     <QtUic Include="Forms\MainWindow.ui" />
-    <QtUic Include="Src\DeviceListWidget.ui" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Adapter.cpp" />
-    <ClCompile Include="Src\DeviceListWidget.cpp" />
-    <ClCompile Include="Src\LogWidget.cpp" />
-    <ClCompile Include="Src\FilterGenerator.cpp" />
-    <ClCompile Include="Src\IPv4.cpp" />
+    <ClCompile Include="Src\qsn\Frame.cpp" />
+    <ClCompile Include="Src\qsn\FrameParser.cpp" />
+    <ClCompile Include="Src\qsn\FramesStash.cpp" />
+    <ClCompile Include="Src\qsn\Adapter.cpp" />
+    <ClCompile Include="Src\qsn\Packet.cpp" />
+    <ClCompile Include="Src\Widgets\DeviceListWidget.cpp" />
+    <ClCompile Include="Src\Widgets\FramesTableView.cpp" />
+    <ClCompile Include="Src\Widgets\LogWidget.cpp" />
+    <ClCompile Include="Src\qsn\FilterGenerator.cpp" />
+    <ClCompile Include="Src\qsn\Structures\IPv4Interface.cpp" />
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\MainWindow.cpp" />
-    <ClCompile Include="Src\AdapterManager.cpp" />
+    <ClCompile Include="Src\qsn\AdapterManager.cpp" />
+    <ClCompile Include="Src\qsn\FrameListener.cpp" />
+    <ClCompile Include="Src\Models\FramesModel.cpp" />
     <ClCompile Include="Src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Src\TimeFormatter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Src\MainWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="Src\LogWidget.hpp" />
-    <QtMoc Include="Src\DeviceListWidget.h" />
-    <ClInclude Include="Src\Adapter.h" />
-    <ClInclude Include="Src\FilterGenerator.h" />
-    <ClInclude Include="Src\IPv4Address.h" />
-    <ClInclude Include="Src\IPv4Interface.h" />
-    <ClInclude Include="Src\IPv4Packet.h" />
-    <QtMoc Include="Src\Logger.hpp" />
-    <ClInclude Include="Src\AdapterManager.h" />
+    <ClInclude Include="Src\qsn\Frame.h" />
+    <ClInclude Include="Src\qsn\Packet.h" />
+    <ClInclude Include="Src\qsn\Segment.h" />
+    <ClInclude Include="Src\TimeFormatter.h" />
+    <QtMoc Include="Src\Widgets\LogWidget.hpp" />
+    <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
+    <QtMoc Include="Src\Widgets\FramesTableView.h" />
+    <ClInclude Include="Src\qsn\Utils\Helper.h" />
+    <ClInclude Include="Src\qsn\FrameParser.h" />
+    <ClInclude Include="Src\qsn\FramesStash.h" />
+    <ClInclude Include="Src\qsn\Adapter.h" />
+    <ClInclude Include="Src\qsn\Utils\Stoppable.h" />
+    <ClInclude Include="Src\qsn\Structures\EthernetHeader.h" />
+    <ClInclude Include="Src\qsn\FilterGenerator.h" />
+    <ClInclude Include="Src\qsn\Structures\RawFrame.h" />
+    <ClInclude Include="Src\qsn\Structures\Types.h" />
+    <ClInclude Include="Src\qsn\Structures\IPv4Interface.h" />
+    <ClInclude Include="Src\qsn\Structures\IPv4Header.h" />
+    <QtMoc Include="Src\qsn\Utils\Logger.hpp" />
+    <ClInclude Include="Src\qsn\AdapterManager.h" />
+    <ClInclude Include="Src\qsn\FrameListener.h" />
+    <QtMoc Include="Src\Models\FramesModel.h" />
+    <ClInclude Include="Src\qsn\Printer.h" />
     <ClInclude Include="Src\stdafx.h" />
-    <ClInclude Include="Src\UDPPacket.h" />
+    <ClInclude Include="Src\qsn\Structures\UDPHeader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

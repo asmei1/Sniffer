@@ -3,14 +3,14 @@
 #include "ui_DeviceListWidget.h"
 
 
-DeviceListWidget::DeviceListWidget(const std::vector<Adapter>& devices, QWidget* parent)
+DeviceListWidget::DeviceListWidget(const std::vector<qsn::Adapter>& devices, QWidget* parent)
    : QDialog(parent), ui(new Ui::DeviceListWidget())
 {
    this->ui->setupUi(this);
    this->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 
    this->ui->buttonBox->button(QDialogButtonBox::Ok)->setDisabled(true);
-   this->ui->tableWidget_devices->setColumnWidth(NAME_COL, 280);
+   this->ui->tableWidget_devices->setColumnWidth(NAME_COL, 400);
    this->ui->tableWidget_devices->setColumnWidth(LOOPBACK_COL, 70);
 
    for(const auto& d : devices)
@@ -47,13 +47,7 @@ DeviceListWidget::DeviceListWidget(const std::vector<Adapter>& devices, QWidget*
             this->ui->buttonBox->button(QDialogButtonBox::Ok)->setDisabled(false);
          });
 
-      connect(this->ui->buttonBox, &QDialogButtonBox::accepted, [this, devices]()
-      {
-         int row = this->ui->tableWidget_devices->selectedItems()[0]->row();
-         this->selectedAdapterName = this->ui->tableWidget_devices->item(row, NAME_COL)->text();
-
-         QDialog::accept();
-      });
+      connect(this->ui->buttonBox, &QDialogButtonBox::accepted, this, &DeviceListWidget::selectDevice);
       connect(this->ui->buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
    }
 }
@@ -68,4 +62,17 @@ DeviceListWidget::~DeviceListWidget()
 QString DeviceListWidget::getNameOfSelectedAdapter() const
 {
    return this->selectedAdapterName;
+}
+
+void DeviceListWidget::on_tableWidget_devices_itemDoubleClicked(QTableWidgetItem *item)
+{
+   selectDevice();
+}
+
+void DeviceListWidget::selectDevice()
+{
+   int row = this->ui->tableWidget_devices->selectedItems()[0]->row();
+   this->selectedAdapterName = this->ui->tableWidget_devices->item(row, NAME_COL)->text();
+
+   QDialog::accept();
 }

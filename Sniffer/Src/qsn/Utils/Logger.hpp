@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "LogWidget.hpp"
+#include "Widgets/LogWidget.hpp"
 
 class Logger : public QObject
 {
@@ -15,9 +15,9 @@ public:
    }
 
    Logger(const Logger&) = delete;
-   Logger& operator= (const Logger) = delete;
+   Logger& operator= (const Logger&) = delete;
 
  
 signals:
-   void log(const QString& msgText, LogWidget::LogLevel level);
+   void log(const QString& msgText, LogWidget::LogLevel level = LogWidget::LogLevel::INFO);
 };

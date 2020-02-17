@@ -35,3 +35,5 @@
 *.ilk
 *.ipch
 /.vs/
+*.iobj
+/x64

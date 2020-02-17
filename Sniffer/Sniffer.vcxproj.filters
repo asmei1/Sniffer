@@ -45,11 +45,20 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Structures">
-      <UniqueIdentifier>{7915ec52-a104-40df-9016-f26ec68415d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Widgets">
       <UniqueIdentifier>{1a0bc2f8-70dc-43c5-ab86-2712d97eede5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{31511009-1f03-4038-9dc9-c8902f24425d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qsn">
+      <UniqueIdentifier>{66e750ba-fb91-4712-91ac-1ee6edc69755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qsn\Structures">
+      <UniqueIdentifier>{7915ec52-a104-40df-9016-f26ec68415d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="qsn\Utils">
+      <UniqueIdentifier>{cce4703e-522b-46b4-968b-f1b26353c0db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +73,7 @@
     <QtUic Include="Forms\MainWindow.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtUic Include="Src\DeviceListWidget.ui">
+    <QtUic Include="Forms\DeviceListWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -78,22 +87,46 @@
     <ClCompile Include="Src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\FilterGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\IPv4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\LogWidget.cpp">
+    <ClCompile Include="Src\Widgets\LogWidget.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Src\DeviceListWidget.cpp">
+    <ClCompile Include="Src\Widgets\DeviceListWidget.cpp">
       <Filter>Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Adapter.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Src\qsn\Structures\IPv4Interface.cpp">
+      <Filter>qsn\Structures</Filter>
     </ClCompile>
-    <ClCompile Include="Src\AdapterManager.cpp">
+    <ClCompile Include="Src\qsn\FilterGenerator.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\AdapterManager.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\Adapter.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\FrameListener.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Models\FramesModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\FramesStash.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Widgets\FramesTableView.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\Frame.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\FrameParser.cpp">
+      <Filter>qsn</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\qsn\Packet.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TimeFormatter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,39 +134,81 @@
     <QtMoc Include="Src\MainWindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Src\LogWidget.hpp">
+    <QtMoc Include="Src\Widgets\LogWidget.hpp">
       <Filter>Widgets</Filter>
     </QtMoc>
-    <QtMoc Include="Src\Logger.hpp">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Src\DeviceListWidget.h">
+    <QtMoc Include="Src\Widgets\DeviceListWidget.h">
       <Filter>Widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\qsn\Utils\Logger.hpp">
+      <Filter>qsn\Utils</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Widgets\FramesTableView.h">
+      <Filter>Widgets</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Models\FramesModel.h">
+      <Filter>Models</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\IPv4Interface.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Structures\EthernetHeader.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\FilterGenerator.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Structures\IPv4Header.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\IPv4Address.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\Structures\IPv4Interface.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\UDPPacket.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\Structures\Types.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\IPv4Packet.h">
-      <Filter>Structures</Filter>
+    <ClInclude Include="Src\qsn\Structures\UDPHeader.h">
+      <Filter>qsn\Structures</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Adapter.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Src\qsn\Printer.h">
+      <Filter>qsn</Filter>
     </ClInclude>
-    <ClInclude Include="Src\AdapterManager.h">
+    <ClInclude Include="Src\qsn\FilterGenerator.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\AdapterManager.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Adapter.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Utils\Helper.h">
+      <Filter>qsn\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Utils\Stoppable.h">
+      <Filter>qsn\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Structures\RawFrame.h">
+      <Filter>qsn\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\FrameListener.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\FramesStash.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Segment.h">
+      <Filter>qsn\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Packet.h">
+      <Filter>qsn\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\Frame.h">
+      <Filter>qsn\Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\qsn\FrameParser.h">
+      <Filter>qsn</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\TimeFormatter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,9 @@
 #include <assert.h>
 #include <sstream>
 #include "AdapterManager.h"
+#include "Printer.h"
+
+using namespace qsn;
 
 std::ostream& operator<<(std::ostream& stream, Adapter& dev)
 {
@@ -21,6 +24,11 @@ Adapter::Adapter(const std::string& name, const std::string& description, bool l
 void Adapter::addIPv4Interface(const IPv4Interface& ipv4Interface)
 {
    this->ipv4List.push_back(ipv4Interface);
+}
+
+void Adapter::addIPv4Interface(const pcap_addr_t* address)
+{
+   this->ipv4List.push_back(IPv4Interface::getInterface(address));
 }
 
 std::string Adapter::getName() const
@@ -55,28 +63,56 @@ std::string Adapter::getFullDescription() const
 
    for(const auto& in : this->ipv4List)
    {
-      rV += "\tAddress: " + in.ipv4.toString() + "\n";
-      rV += "\tMask: " + in.netmask.toString() + "\n";
-      rV += "\tBroadcast: " + in.broadcast.toString() + "\n";
-      rV += "\tDestination Address: " + in.destination.toString() + "\n";
+      rV += "\tAddress: " + ipv42String(in.ipv4) + "\n";
+      rV += "\tMask: " + ipv42String(in.netmask) + "\n";
+      rV += "\tBroadcast: " + ipv42String(in.broadcast) + "\n";
+      rV += "\tDestination Address: " + ipv42String(in.destination) + "\n";
    }
    return rV;
 }
 
-bool Adapter::openAdapter(std::string& errorString)
+pcap_t* Adapter::getRawHandler() const
 {
-   bool rV = false;
+   return this->adHandler;
+}
+
+void Adapter::openAdapter()
+{
    char errorBuff[PCAP_ERRBUF_SIZE] = {};
 
-   pcap_t* temp = pcap_open(this->name.c_str(), PACKET_PART_TO_CAPTURE, PCAP_OPENFLAG_PROMISCUOUS, 1000, NULL, errorBuff);
+   pcap_t* temp = pcap_open(this->name.c_str(), PACKET_PART_TO_CAPTURE, PCAP_OPENFLAG_PROMISCUOUS,
+                 1000, NULL, errorBuff);
    if(nullptr != temp)
    {
-      rV = true;
-
       this->adHandler = temp;
-      errorString = errorBuff;
    }
-   return rV;
+   else
+   {
+      throw (errorBuff);
+   }
+}
+
+void Adapter::closeAdapter()
+{
+   pcap_close(this->adHandler);
+   this->adHandler = nullptr;
+}
+
+pcap_dumper_t* Adapter::openDumpFile(const std::string& fileName)
+{
+   this->dumpFile = pcap_dump_open(this->adHandler, fileName.c_str());
+   return this->dumpFile;
+}
+
+pcap_dumper_t* Adapter::getDumpRawPtr() const
+{
+   return this->dumpFile;
+}
+
+void Adapter::closeDumpFile()
+{
+   pcap_dump_flush(this->dumpFile);
+   pcap_dump_close(this->dumpFile);
 }
 
 bool Adapter::checkLinkLayer(LinkLayer linkName) const

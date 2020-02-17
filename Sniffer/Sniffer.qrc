@@ -1,4 +1,7 @@
 <RCC>
-    <qresource prefix="MainWindow">
+    <qresource prefix="/">
+        <file alias="green_circle">Resources/green-circle.png</file>
+        <file alias="red_circle">Resources/red-circle.png</file>
+        <file alias="gray_circle">Resources/gray-circle.png</file>
     </qresource>
 </RCC>
