@@ -17,12 +17,15 @@ win32:RC_FILE = Sniffer.rc
 HEADERS += ./stdafx.h \
     ./MainWindow.h \
     Src/DeviceListWidget.h \
-    Src/MainWindow.h
+    Src/MainWindow.h \
+    Src/ResolverIPWidget.h
 SOURCES += ./main.cpp \
     ./MainWindow.cpp \
     ./stdafx.cpp \
     Src/DeviceListWidget.cpp \
-    Src/MainWindow.cpp
+    Src/MainWindow.cpp \
+    Src/ResolverIPWidget.cpp
 FORMS += ./Forms/MainWindow.ui \
-    Forms/DeviceListWidget.ui
+    Forms/DeviceListWidget.ui \
+    Forms/ResolverIPWidget.ui
 RESOURCES += Sniffer.qrc

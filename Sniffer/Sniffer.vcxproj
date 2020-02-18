@@ -54,11 +54,11 @@
     <Import Project="$(QtMsBuild)\qt_defaults.props" />
   </ImportGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;network</QtModules>
     <QtInstall>msvc5_12_6__2017_64_</QtInstall>
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;widgets;network</QtModules>
     <QtInstall>msvc5_12_6__2017_64_</QtInstall>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
@@ -146,6 +146,7 @@
   <ItemGroup>
     <QtUic Include="Forms\DeviceListWidget.ui" />
     <QtUic Include="Forms\MainWindow.ui" />
+    <QtUic Include="Forms\ResolverIPWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\qsn\Frame.cpp" />
@@ -168,6 +169,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Src\TimeFormatter.cpp" />
+    <ClCompile Include="Src\Widgets\ResolverIPWidget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Src\MainWindow.h" />
@@ -177,6 +179,7 @@
     <ClInclude Include="Src\qsn\Packet.h" />
     <ClInclude Include="Src\qsn\Segment.h" />
     <ClInclude Include="Src\TimeFormatter.h" />
+    <QtMoc Include="Src\Widgets\ResolverIPWidget.h" />
     <QtMoc Include="Src\Widgets\LogWidget.hpp" />
     <QtMoc Include="Src\Widgets\DeviceListWidget.h" />
     <QtMoc Include="Src\Widgets\FramesTableView.h" />

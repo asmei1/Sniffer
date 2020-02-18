@@ -131,6 +131,10 @@ QVariant FramesModel::data(const QModelIndex& index, int role) const
       {
          return qsn::rawData2String(&rP->data[0], rP->caplen).c_str();
       }
+      else if(role == PacketsInfo::RAW_PTR)
+      {
+         return QVariant::fromValue((void*)rP);
+      }
    }
    return QVariant();
 }

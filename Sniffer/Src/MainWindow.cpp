@@ -5,6 +5,7 @@
 #include "Widgets/DeviceListWidget.h"
 #include "Models/FramesModel.h"
 #include <QDebug>
+#include "Widgets/ResolverIPWidget.h"
 
 
 MainWindow::MainWindow(QWidget* parent)
@@ -228,6 +229,8 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
    bool stopActFlag;
    bool saveActFlag;
    bool loadActFlag;
+   bool resolveActFlag;
+
    switch(appStatus)
    {
       case AppStatus::Init:
@@ -236,6 +239,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          toolTip = tr("Not selected adapter to listening");
          startActFlag = false;
          saveActFlag = false;
+         resolveActFlag = false;
          stopActFlag = false;
          loadActFlag = true;
          break;
@@ -247,6 +251,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          startActFlag = false;
          stopActFlag = true;
          saveActFlag = false;
+         resolveActFlag = false;
          loadActFlag = false;
          break;
       }
@@ -256,6 +261,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
          toolTip = tr("Stopped");
          startActFlag = true;
          saveActFlag = true;
+         resolveActFlag = true;
          stopActFlag = false;
          loadActFlag = true;
          break;
@@ -268,6 +274,7 @@ void MainWindow::setAppStatus(const AppStatus& appStatus)
    this->ui->actionStop_listening->setEnabled(stopActFlag);
    this->ui->actionSave_dump_file->setEnabled(saveActFlag);
    this->ui->actionLoad_dump_file->setEnabled(loadActFlag);
+   this->ui->actionResolve_address_to_domain_names->setEnabled(resolveActFlag);
 }
 
 void MainWindow::on_actionSave_dump_file_triggered()
@@ -286,4 +293,9 @@ void MainWindow::on_actionLoad_dump_file_triggered()
       //load data from file
       this->packetListener->loadDumpFile(path.toStdString());
    }
+}
+
+void MainWindow::on_actionResolve_address_to_domain_names_triggered()
+{
+   ResolverIPWidget(this->packetsModel).exec();
 }

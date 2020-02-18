@@ -76,6 +76,9 @@
     <QtUic Include="Forms\DeviceListWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="Forms\ResolverIPWidget.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\MainWindow.cpp">
@@ -129,6 +132,9 @@
     <ClCompile Include="Src\TimeFormatter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Widgets\ResolverIPWidget.cpp">
+      <Filter>Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Src\MainWindow.h">
@@ -148,6 +154,9 @@
     </QtMoc>
     <QtMoc Include="Src\Models\FramesModel.h">
       <Filter>Models</Filter>
+    </QtMoc>
+    <QtMoc Include="Src\Widgets\ResolverIPWidget.h">
+      <Filter>Widgets</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>

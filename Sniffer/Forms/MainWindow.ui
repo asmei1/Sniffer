@@ -52,7 +52,7 @@
         <bool>false</bool>
        </property>
       </widget>
-      <widget class="QTreeView" name="treeView_infoView">
+      <widget class="QListWidget" name="listWidget_infoView">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -151,6 +151,7 @@ border-color: black black black transparent;
      <string>Sniffer</string>
     </property>
     <addaction name="actionShow_device_list"/>
+    <addaction name="actionResolve_address_to_domain_names"/>
     <addaction name="separator"/>
     <addaction name="actionStart_listening"/>
     <addaction name="actionStop_listening"/>
@@ -300,6 +301,11 @@ border-color: black black black transparent;
   <action name="actionLoad_dump_file">
    <property name="text">
     <string>Load dump file</string>
+   </property>
+  </action>
+  <action name="actionResolve_address_to_domain_names">
+   <property name="text">
+    <string>Resolve address to domain names</string>
    </property>
   </action>
  </widget>

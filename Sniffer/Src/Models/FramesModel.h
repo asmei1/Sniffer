@@ -30,7 +30,8 @@ public:
    enum PacketsInfo
    {
       HEX_CONTENT = Qt::UserRole,
-      ASCII_CONTENT
+      ASCII_CONTENT,
+      RAW_PTR
    };
 
 private:

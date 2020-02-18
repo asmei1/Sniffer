@@ -38,6 +38,8 @@ private slots:
 
    void on_actionLoad_dump_file_triggered();
 
+   void on_actionResolve_address_to_domain_names_triggered();
+
 private:
    enum class AppStatus
    {
